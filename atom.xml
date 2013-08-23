@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+ 
+ <title>/* LIFE RUNS ON CODE */</title>
+ <link href="http://yongwan.github.io/" rel="self"/>
+ <link href="http://yongwan.github.io"/>
+ <updated>2013-08-23T17:11:11+09:00</updated>
+ <id>http://yongwan.github.io</id>
+ <author>
+   <name>YongWan Jo</name>
+   <email>yongwan.jo@wany.kr</email>
+ </author>
+
+ 
+ <entry>
+   <title>Windows 2008 서버에서 ASP.NET Profiling</title>
+   <link href="http://yongwan.github.io/2013/08/09/profiling-asp-dot-net-stand-alone-on-windows-2008"/>
+   <updated>2013-08-09T00:00:00+09:00</updated>
+   <id>http://yongwan.github.io/2013/08/09/profiling-asp-dot-net-stand-alone-on-windows-2008</id>
+   <content type="html">&lt;p&gt;요즘은 Performance Test 때문에 몇몇 팀원이 바쁘다.
+나는 다행히(?)도 그쪽 일을 하고 있지 않아 한가한데 여차저차해서 Visual Studio Profiling 기능이 팀의 이슈가 되었다.
+사실 예전에 한번 훑어 봤던 내용이기는 한데 한 번도 해보지를 않아서 이번 기회에 한 번 경험해봤다.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://msdn.microsoft.com/en-us/library/z9z62c29(v=vs.100).aspx&quot;&gt;Visual Studio에서의 프로파일링&lt;/a&gt;은 권차장님께서 이미 성공하셨다.
+하지만 나는 호스트에는 VS와 DB가 Application + Web은 VM에 설치되어 있기 때문에 다른 방법이 필요했다.
+해서 내 환경에 맞게 Remote Machine에 대한 Profiling을 찾아보던 중에 &lt;a href=&quot;http://msdn.microsoft.com/en-us/library/dd255411(v=vs.100).aspx&quot;&gt;Stand-Alone으로 Profiling&lt;/a&gt;을 하는 방벙을 MSDN에서 찾게 되었다.
+그리고 그와 연결되어 있던 &lt;a href=&quot;http://msdn.microsoft.com/en-us/library/dd255401(v=vs.100).aspx&quot;&gt;Command-Line Profiling of ASP.NET Web Applications&lt;/a&gt;.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Configuration&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;우리는 아직 Visual Studio 2010을 사용하고 있기 때문에 &lt;a href=&quot;http://www.microsoft.com/ko-kr/download/details.aspx?id=23205&quot;&gt;Visual Studio 2010 성능 도구 서비스 팩 1&lt;/a&gt;을 다운받고 설치.&lt;/li&gt;
+      &lt;li&gt;환경변수에 명령어 PATH설정&lt;br /&gt;
+  &lt;code&gt;set PATH=%PATH%;&quot;C:\Program Files (x86)\Microsoft Visual Studio 9.0\Team Tools\Performance Tools&quot;&lt;/code&gt;&lt;/li&gt;
+      &lt;li&gt;심볼 서버 설정을 위해 _NT_SYBBOL_PATH를 환경 변수에 등록&lt;br /&gt;
+  &lt;code&gt;set _NT_SYBBOL_PATH=symsrv*symsrv.dll*c:\localcache*http://msdl.microsoft.com/download/symbols&lt;/code&gt;&lt;br /&gt;
+  &lt;em&gt;c:\localcache&lt;/em&gt;에 Compile시 생성된 PDB파일들을 Copy해야한다. &lt;a href=&quot;http://msdn.microsoft.com/en-us/library/89axdy6y(v=vs.100).aspx&quot;&gt;How to: Reference Windows Symbol Information&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;실행&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code&gt;VSPerfASPNETCmd websiteUrl&lt;/code&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Error&lt;/p&gt;
+
+    &lt;p&gt;과감하게 실행하고는 아래와 같은 Error가 나타났다. 쳇.
+&amp;gt; 오류
+&amp;gt;
+&amp;gt;	VSP 7008: ASP.net 예외: “웹 사이트 메타베이스에 예기치 않은 정보가 들어 있거나 메타베이스에 액세스할 수 있는 권한이 없습
+  니다. IIS 메타베이스에 액세스하려면 로컬 컴퓨터의 Administrators 그룹 멤버여야 합니다. 따라서 로컬 IIS 웹 사이트를 만들
+  거나 열 수 없습니다. 파일이 있는 폴더에 대해 읽기, 쓰기 및 수정 권한이 있으면 해당 폴더를 가리키는 파일 시스템 웹 사이트
+  를 만들어 계속할 수 있습니다.”&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;해결방법&lt;/p&gt;
+
+    &lt;p&gt;&lt;a href=&quot;http://blogs.msdn.com/b/profiler/archive/2010/07/23/tip-fixing-vsperfaspnetcmd-metabase-errors.aspx&quot;&gt;Tip: Fixing VSPerfASPNetCmd metabase errors&lt;/a&gt;에 의하면 IIS의 Feature를 Turn On하면 된다고 하는데 Windows 2008은 Feature가 서버 관리자에 있다.&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;IIS 6 Scripting Tools&lt;/li&gt;
+      &lt;li&gt;IIS 6 WMI Compatibility&lt;/li&gt;
+      &lt;li&gt;IIS Metabase and IIS 6 configuration compatibility&lt;/li&gt;
+      &lt;li&gt;ASP.NET&lt;/li&gt;
+      &lt;li&gt;Windows Authentication&lt;/li&gt;
+    &lt;/ul&gt;
+
+    &lt;p&gt;&lt;img src=&quot;/assets/attachments/2013-08-09-profiling-error/WindowsFeatureOn2008_001.png&quot; alt=&quot;서버 관리자&quot; /&gt;
+  &lt;img src=&quot;/assets/attachments/2013-08-09-profiling-error/WindowsFeatureOn2008_002.png&quot; alt=&quot;역할 서비스 추가&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;결과&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;결과로 떨어지는 .vsp는 Visual Studio에서 보면 야무치게 잘 나온다.&lt;/li&gt;
+      &lt;li&gt;Visual Studio로 Profiling을 했을 때는 Source까지 연결 되어 있던데 그 것까진 안된다.&lt;/li&gt;
+      &lt;li&gt;결과로 떨어지는 csv의 한글은 Excel에서 깨져서 보인다. 응급처치(?)는 &lt;a href=&quot;http://blog.daum.net/sualchi/13720149&quot;&gt;여기&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;괜찮은 한국어 포스팅은 &lt;a href=&quot;http://plantrue.tistory.com/24&quot;&gt;여기&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;Profiling중에 다른 Command를 사용해서 확인하고 싶은게 있다면 /NoWait Option을 사용하면 된다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+</content>
+ </entry>
+ 
+ <entry>
+   <title>ASP.NET MVC + jQuery AJAX 에서의 Error Handling</title>
+   <link href="http://yongwan.github.io/2013/05/29/error-handling-on-jquery-ajax-on-asp-dot-net-mvc"/>
+   <updated>2013-05-29T00:00:00+09:00</updated>
+   <id>http://yongwan.github.io/2013/05/29/error-handling-on-jquery-ajax-on-asp-dot-net-mvc</id>
+   <content type="html">&lt;p&gt;자. 우리 팀에서 결론 없이 무한루프를 돌고 있는 이야기를 시작해야겠다.
+안타깝게도 결론은 UK팀에서 내겠지만.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Error 처리의 경우 UX 관점에서 어떤 경우 어떻게 보여줄 것인가에 대한 것이 우선 정의되어 있어야 개발자가 그 경우에 따라 개발이 가능하겠다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;우리 제품은 4가지의 방법으로 표현이 가능하도록 되어 있는데 UX 측면에서만 보자면
+    &lt;ul&gt;
+      &lt;li&gt;CRUD중 R을 제외한 경우 실행하기 전 Domain Model에서 자체 Validation을 제공하고 있고 이 결과(Validation Results)를 ASP.NET MVC의 ModelSatate에 넣어서 ValidationSummary()를 이용해서 보여준다.&lt;/li&gt;
+      &lt;li&gt;CRUD중 R의 경우 값은 정상적이지만(즉, 그 View를 표현할 수 있는 충분한 Data를 읽어왔지만) Data의 Status에 따른 warning을 보여주어야 할 경우 ViewModel에 Message property를 추가 및 사용하여 View에 Icon과 함께 이쁘게 보여준다.&lt;/li&gt;
+      &lt;li&gt;Exception의 생겼을 경우. 즉, CRUD에서 개발자가 생각하지 못했던 Exception(e.g. user가 정상적인 process를 거치지 않고 db를 업데이트하여 data가 정상적이지 않을 때 또는 Defect)이 발생하게 되면 ASP.NET MVC의 HandleErrorAttribute + Error.aspx Page를 이용해서 보여준다.&lt;/li&gt;
+      &lt;li&gt;jQuery AJAX를 이용한 Exception의 출력은 jQuery Dialog를 이용해서 pop-up의 형태로 보여준다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;일반적인 경우는 위의 마지막을 제외한 방법으로 해결이 가능하지만, 앞으로 Exception을 jQuery Dialog를 가지고 pop-up으로 보여주는 것은 사용하지 않기로 했다. UK의 결정.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;AJAX의 CRUD(GET, POST)의 경우 모두 위의 첫번째, 두번째 방법으로 해결이 되지만 Exception은 어떻게 해결해야할지가 관건이 된다. 세 번째 방법으로 Error를 보여줄 경우 그 Page안에 Main Page로 가는 링크가 보여지고 AJAX의 정상적인 결과는 Partial View인데 Exception은 전체 PAGE가 되는 상황이 발생하기 때문이다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;이 걸 해결하는 방법은 생각외로 간단하다. Error View로 사용할 Partial View ( e.g. MyError.ascx )를 만들어서 Partial View의 Action에 [HandleError]를 사용하면 된다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;이제 조금 더 깊게 들어가서. AJAX로 파일을 업로드하기 위해서 쓰는 &lt;a href=&quot;http://jquery.malsup.com/form/&quot;&gt;jQuery Form Plugin&lt;/a&gt;이 있다. 이 플러그인만 그런지 모르겠지만 이 녀석은 c#에서 error를 throw하더라도 error handler로 가지 않고 success handler로 가게끔 되어 있다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;원인은 Plugin이 response code를 어떤 경우에도 조작하지 않기 때문이라고. 아직 레벨이 낮아서 Plugin Source를 봐도 잘 이해하지는 못하겠다. 여튼 이런 경우에 Response Status를 200이 아닌 다른 녀석으로 Return하거나 특정 상태를 return해서 success에서 handling하는 방법이 있다고 한다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Googling해서 찾은 가장 괜찮은 LINK는 요기 : “&lt;a href=&quot;http://stackoverflow.com/questions/3995355/jquery-form-plugin-no-error-handling&quot;&gt;jquery form plugin, no error handling&lt;/a&gt;”&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Design Guidelines for Exceptions</title>
+   <link href="http://yongwan.github.io/2013/05/24/Design-Guidelines-for-Exceptions"/>
+   <updated>2013-05-24T00:00:00+09:00</updated>
+   <id>http://yongwan.github.io/2013/05/24/Design-Guidelines-for-Exceptions</id>
+   <content type="html">&lt;p&gt;ASP.NET MVC에서 Exception 처리와 표현에 대해서 토의가 있었지만 현재까지는 결론없이 끝났다.
+결국은 UK의 결정에 따라 가겠지만 일단 우리 내부적으로 어떻게 해야할 지 그리고 그 근거는 어디에 있는지 이야기할 필요가 있다고 생각되는 한 편. 기본을 제대로 이해하지 못하고 무턱대고 삽질하는 것보다 기본을 먼저 아는 것이 필요하겠다 싶어서 예전에 봤었지만 다시한 번 정독.&lt;/p&gt;
+
+&lt;p&gt;제일 필요한 부분이 &lt;a href=&quot;http://msdn.microsoft.com/en-us/library/ms229007(v=vs.100).aspx&quot;&gt;Catching and Throwing Standard Exception Types&lt;/a&gt;. &lt;a href=&quot;http://msdn.microsoft.com/ko-kr/library/ms229007(v=vs.100).aspx&quot;&gt;한글도 지원&lt;/a&gt;을 해주지만 번역이 이해하는 게 더 어렵다;; 내가 번역하려고 하면 더더욱 어렵다;;;&lt;/p&gt;
+
+&lt;h4 id=&quot;exeption-systemexception&quot;&gt;Exeption, SystemException&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;Eception 또는 SystemException을 던지지 마라.&lt;/li&gt;
+  &lt;li&gt;re-throw를 의도한 것이 아니라면 Exception, SystemException을 Catch하지 마라. ( Log를 쓰거나 할 경우? )&lt;/li&gt;
+  &lt;li&gt;top-level exception handler(Exception의 마지막 layer, MVC의 경우 Controller)가 아니라면 Exception 또는 SystemException을 Catch하지 마라.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;applicationexception&quot;&gt;ApplicationException&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;ApplicationException 말고 Exception을 상속 받아라.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;invalidoperationexception&quot;&gt;InvalidOperationException&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;property의 setter또는 method를 부를 때 객체의 상태가 행동을 하는데 적합하지 않다면 InvalidOperatonException을 사용하여 던져라.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;argumentexception-argumentnullexception-and-argumentoutofrangeexception&quot;&gt;ArgumentException, ArgumentNullException and ArgumentOutOfRangeException&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;Argument가 적절하지 않는 녀석이 왔다면 ArgumentException 또는 그 것을 상속받은 Exception을 던져라. 가능하면 가장 하위의 Exception을 사용.&lt;/li&gt;
+  &lt;li&gt;ParamName property에 값을 넣어라.&lt;/li&gt;
+  &lt;li&gt;Property의 setter에서는 ParamName으로 “value”를 사용해라.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;csharp&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;span class=&quot;k&quot;&gt;set&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+	&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+		&lt;span class=&quot;k&quot;&gt;throw&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;ArgumentNullException&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;value&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+	&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;address&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;public API에서 NullReferenceException, AccessViolationException, InvalidCastException 또는 IndexOutOfRangeException을 명시적 또는 암시적으로 던지지 못하게 하라. 이러한 Exception들을 던지는 것을 피하기 위해서 Argument들을 check하라.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;stackoverflowexception-outofmemoryexception-comexception-sehexception-and-executionengineexception&quot;&gt;StackOverflowException, OutOfMemoryException, ComException, SEHException and ExecutionEngineException.&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;위 Exception들은 CRL을 통해서만 던지게 되어 있으니까 명시적으로 던지지마라. &lt;/li&gt;
+  &lt;li&gt;StackOverflowException과 SEHException은 명시적으로 Catch하지 마라.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;del&gt;포스팅이 조잡하군.&lt;/del&gt;&lt;/p&gt;
+
+</content>
+ </entry>
+ 
+ <entry>
+   <title>.bind(), .live(), .delegate() and on()</title>
+   <link href="http://yongwan.github.io/2013/05/02/jQuery-bind-live-delegate-on"/>
+   <updated>2013-05-02T00:00:00+09:00</updated>
+   <id>http://yongwan.github.io/2013/05/02/jQuery-bind-live-delegate-on</id>
+   <content type="html">&lt;p&gt;개발하고 있는 source에서 &lt;code&gt;.click()&lt;/code&gt;이랑 &lt;code&gt;.live('click', ...)&lt;/code&gt;을 섞어서 사용하고 있더라.
+갑자기 문득 어떤 방법이 더 좋은 방법인가 하고 찾아보다가 괜찮은 블로깅을 발견! +_+&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://www.elijahmanor.com/2012/02/differences-between-jquery-bind-vs-live.html&quot;&gt;Differences Between jQuery .bind() vs .live() vs .delegate() vs .on()&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;자. 그럼. Let’s start foot translation.
+### Bind
+&lt;code&gt;.click()&lt;/code&gt;은 &lt;code&gt;.bind('click', ...)&lt;/code&gt;을 단순화한 방법이다.&lt;/p&gt;
+
+&lt;h4 id=&quot;section&quot;&gt;장점&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;다양한 브라우저에서 동작한다.  &lt;/li&gt;
+  &lt;li&gt;쉽고 빠르게 사용할 수 있다.&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;.click()&lt;/code&gt;, &lt;code&gt;.hover()&lt;/code&gt; 등과 동작을 하면서 더 쉽게 등록할 수 있다.&lt;/li&gt;
+  &lt;li&gt;id selector에 대해서 빠르게 event를 등록할 뿐만 아니라 event가 전달 되었을 때 거의 즉시 동작한다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;section-1&quot;&gt;단점&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;bind()가 selector와 일치하는 모든 element에 같은 event handler를 붙인다.&lt;/li&gt;
+  &lt;li&gt;같은 selector에 대해서 &lt;strong&gt;동적으로 생성된 element에는 동작하지 않는다.&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;많은 선택을 처리할 때 성능에 문제가 있을 수 있다.&lt;/li&gt;
+  &lt;li&gt;Page load시 성능문제를 야기할 수 있는 첨부가 먼저 실행된다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;live&quot;&gt;Live&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;.live()&lt;/code&gt;는 document의 root에 selector, event 정보와 함께 event handler를 붙인다. 이렇게 함으로서 bubbled(delegated, propagated)된 모든 이벤트에 대해서 하나의 event handler가 동작한다.&lt;/p&gt;
+
+&lt;h4 id=&quot;section-2&quot;&gt;장점&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;code&gt;.bind()&lt;/code&gt;에 처럼 event handler가 여러 번 등록되지 않고 &lt;strong&gt;한번만 등록&lt;/strong&gt;된다.&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;.bind()&lt;/code&gt;에서 &lt;code&gt;.live()&lt;/code&gt;로의 변경이 용이하다. 그냥 ‘bind’를 ‘live’로 고치면 된다.&lt;/li&gt;
+  &lt;li&gt;정보가 document에 등록되어 있기 때문에 &lt;strong&gt;동적으로 생성된 elements에 대해서도 동작&lt;/strong&gt;한다.&lt;/li&gt;
+  &lt;li&gt;document ready event 이 전에 이벤트를 등록할 수 있어서 사용하지 않는 시간에 대한 활용을 가능하도록 도와준다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;section-3&quot;&gt;단점&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;jQuery 1.7 이 후부터는 폐기&lt;/strong&gt;되었기 때문에 단계적으로 code에서 제거하여야 한다.&lt;/li&gt;
+  &lt;li&gt;Chaining을 정상적으로 지원하지 않는다.&lt;/li&gt;
+  &lt;li&gt;Selection은 document의 event handler로 등록되는 곳에만 사용되기 때문에 기본적으로 버려진다.&lt;/li&gt;
+  &lt;li&gt;event가 이미 document까지 delegated되었기 때문에 &lt;code&gt;event.stopPropagation()&lt;/code&gt;을 사용하는 것은 도움이 되지 않는다.&lt;/li&gt;
+  &lt;li&gt;모든 event과 selector정보가 document에 등록되어 있기 때문에 event가 일어나게 되면 jQuery는 어떤 event handler가 호출되었는지 확인하기 위해 &lt;code&gt;matchesSelector&lt;/code&gt;를 이용하여 거대한 metadata 저장소를 뒤진다.&lt;/li&gt;
+  &lt;li&gt;Event가 항상 document까지 전달되기 때문에, DOM이 sleep된 경우, 성능 문제가 있을 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;delegate&quot;&gt;Delegate&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;.live()&lt;/code&gt;와 기능은 비슷하지만 document대신 등록할 element를 지정할 수 있다.&lt;/p&gt;
+
+&lt;h4 id=&quot;section-4&quot;&gt;장점&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;selector와 event정보를 어디에 등록할지 정할 수 있는 option이 존재&lt;/strong&gt;한다.&lt;/li&gt;
+  &lt;li&gt;selection이 바로 실행되지 않고 root element에 등록되어 사용되어 진다.&lt;/li&gt;
+  &lt;li&gt;Chaining을 정상적으로 지원한다.&lt;/li&gt;
+  &lt;li&gt;jQuery가 여전히 일치하는 selector와 event정보를 찾아다녀야 하지만 root element를 지정하기 때문에 그 범위는 줄어들 수 있다.&lt;/li&gt;
+  &lt;li&gt;selector에 일치하는 DOM이 동적으로 생성되어도 정상적으로 동작한다.&lt;/li&gt;
+  &lt;li&gt;document ready event전에 event handler를 등록할 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;section-5&quot;&gt;단점&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;code&gt;.bind()&lt;/code&gt;에서 &lt;code&gt;.delegate()&lt;/code&gt;로의 변경을 바로 할 수 없다.&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;.live()&lt;/code&gt;를 사용하는 것보다는 괜찮지만 &lt;code&gt;matchesSelector&lt;/code&gt;를 사용하는 해서 검색을 하는 것에 대한 고려가 여전히 필요하다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;on&quot;&gt;On&lt;/h3&gt;
+&lt;p&gt;jQuery 이 후부터는 &lt;code&gt;.bind()&lt;/code&gt;, &lt;code&gt;.live()&lt;/code&gt;, &lt;code&gt;.delegate()&lt;/code&gt;가 내부적으로 &lt;code&gt;.on()&lt;/code&gt;을 호출한다.&lt;/p&gt;
+
+&lt;h4 id=&quot;section-6&quot;&gt;장점&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;다양한 event binding에 대해서 통일성을 제공한다.&lt;/li&gt;
+  &lt;li&gt;jQeury code를 단순화시키고 method 호출의 단계를 줄일 수 있다. ( 다른 mehod가 &lt;code&gt;.on()&lt;/code&gt;을 호출하기 때문에 )&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;.delegate()&lt;/code&gt;의 장점으로 제공하고, 필요하다면 &lt;code&gt;.bind()&lt;/code&gt; 기능도 제공한다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;section-7&quot;&gt;단점&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;code&gt;.on()&lt;/code&gt;을 어떻게 사용하느냐에 따라 행동이 변경 때문에 혼란을 야기할 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;section-8&quot;&gt;결론&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;code&gt;.bind()&lt;/code&gt;는 너무 비효율적이다.&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;.live()&lt;/code&gt;는 jQuery 1.7 이상에서 &lt;strong&gt;폐기&lt;/strong&gt;되었기도 하지만 &lt;strong&gt;많은 문제&lt;/strong&gt;를 가지고 있으니 사용하지 마라.&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;.delegate()&lt;/code&gt;는 성능이나 동적으로 생성되는 element와 같은 문제를 한방에 해결해준다.&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;.on()&lt;/code&gt;은 어떻게 사용하는냐에 따라 &lt;code&gt;.bind()&lt;/code&gt;, &lt;code&gt;.live()&lt;/code&gt;, &lt;code&gt;.delegate()&lt;/code&gt;의 역할을 모두 할 수 있기 때문에 &lt;strong&gt;사용의 편리함&lt;/strong&gt;을 가져다 준다.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;jQuery 1.7 이상의 project에서는 &lt;code&gt;.on()&lt;/code&gt;을 사용하자&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;결국 우리 Project는 사용해서는 안 될 메소드만 불러대고 있었던 것이었다. 허허허.&lt;/p&gt;
+
+&lt;p&gt;무언가 구글 번역에서 돌린 듯한 문장을 발견한다면 그건 &lt;del&gt;당신의 착각&lt;/del&gt; 내가 이해를 못해서 그냥 직역해 놓은 것.&lt;/p&gt;
+
+</content>
+ </entry>
+ 
+ <entry>
+   <title>ASP .NET MVC에서 HttpContext를 이용한 Cookie Test</title>
+   <link href="http://yongwan.github.io/2013/04/30/cookie-test-on-asp-dot-net-mvc"/>
+   <updated>2013-04-30T00:00:00+09:00</updated>
+   <id>http://yongwan.github.io/2013/04/30/cookie-test-on-asp-dot-net-mvc</id>
+   <content type="html">&lt;p&gt;Controller에서 내부에서 Cookie 값을 읽고 써야하는 부분이 필요하게 되었는데,
+기존의 코드가 System.Web.HttpContext.Current를 사용하여 Cookie값을 읽어오고 있었다.
+그냥 생각없이 긁어 쓰고 나서 Test Project를 만들려고 하니 머시 방법이 없다.
+그래서 구글링 ㄱㄱ. &lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://stackoverflow.com/questions/785413/difference-between-httpcontext-current-and-controller-context-in-mvc-asp-net&quot;&gt;Difference between HttpContext.Current and Controller.Context in MVC ASP.NET&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;첫번째 답변은 Thread를 따로 만들어 사용하면 Current의 HttpContext와 Controller의 HttpContext는 다를 수가 있다. 하지만 나의 경우는 Thread를 고려할 필요가 없어서 Pass.
+두번째 답변을 보면 &lt;strong&gt;HttpContext의 Mocking을 위해서라면 Controller의 HttpContext를 사용&lt;/strong&gt;할 것을 이야기 하고 있다.&lt;/p&gt;
+
+</content>
+ </entry>
+ 
+ 
+</feed>

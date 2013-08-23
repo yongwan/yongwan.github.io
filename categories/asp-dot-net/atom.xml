@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: asp.net | /* LIFE RUNS ON CODE */]]></title>
+  <link href="/categories/asp-dot-net/atom.xml" rel="self"/>
+  <link href="/"/>
+  <updated>2013-08-23T17:11:11+09:00</updated>
+  <id>/</id>
+  <author>
+    <name><![CDATA[{"name"=>"YongWan Jo", "email"=>"yongwan.jo@wany.kr", "github"=>"yongwan", "twitter"=>"yongwany", "facebook"=>"yongwan.jo"}]]></name>
+    
+  </author>
+  <generator uri="https://github.com/recurser/jekyll-plugins">Recurser</generator>
+
+	
+	
+	<entry>
+		<title type="html"><![CDATA[Windows 2008 서버에서 ASP.NET Profiling]]></title>
+		<link href="/2013/08/09/profiling-asp-dot-net-stand-alone-on-windows-2008"/>
+		<updated>2013-08-09T00:00:00+09:00</updated>
+		<id>/2013/08/09/profiling-asp-dot-net-stand-alone-on-windows-2008</id>
+		<content type="html"><![CDATA[<p>요즘은 Performance Test 때문에 몇몇 팀원이 바쁘다.
+나는 다행히(?)도 그쪽 일을 하고 있지 않아 한가한데 여차저차해서 Visual Studio Profiling 기능이 팀의 이슈가 되었다.
+사실 예전에 한번 훑어 봤던 내용이기는 한데 한 번도 해보지를 않아서 이번 기회에 한 번 경험해봤다.</p>
+
+<p><a href="http://msdn.microsoft.com/en-us/library/z9z62c29(v=vs.100).aspx">Visual Studio에서의 프로파일링</a>은 권차장님께서 이미 성공하셨다.
+하지만 나는 호스트에는 VS와 DB가 Application + Web은 VM에 설치되어 있기 때문에 다른 방법이 필요했다.
+해서 내 환경에 맞게 Remote Machine에 대한 Profiling을 찾아보던 중에 <a href="http://msdn.microsoft.com/en-us/library/dd255411(v=vs.100).aspx">Stand-Alone으로 Profiling</a>을 하는 방벙을 MSDN에서 찾게 되었다.
+그리고 그와 연결되어 있던 <a href="http://msdn.microsoft.com/en-us/library/dd255401(v=vs.100).aspx">Command-Line Profiling of ASP.NET Web Applications</a>.</p>
+
+<ul>
+  <li>
+    <p>Configuration</p>
+
+    <ul>
+      <li>우리는 아직 Visual Studio 2010을 사용하고 있기 때문에 <a href="http://www.microsoft.com/ko-kr/download/details.aspx?id=23205">Visual Studio 2010 성능 도구 서비스 팩 1</a>을 다운받고 설치.</li>
+      <li>환경변수에 명령어 PATH설정<br />
+  <code>set PATH=%PATH%;"C:\Program Files (x86)\Microsoft Visual Studio 9.0\Team Tools\Performance Tools"</code></li>
+      <li>심볼 서버 설정을 위해 _NT_SYBBOL_PATH를 환경 변수에 등록<br />
+  <code>set _NT_SYBBOL_PATH=symsrv*symsrv.dll*c:\localcache*http://msdl.microsoft.com/download/symbols</code><br />
+  <em>c:\localcache</em>에 Compile시 생성된 PDB파일들을 Copy해야한다. <a href="http://msdn.microsoft.com/en-us/library/89axdy6y(v=vs.100).aspx">How to: Reference Windows Symbol Information</a></li>
+    </ul>
+  </li>
+  <li>
+    <p>실행</p>
+
+    <ul>
+      <li><code>VSPerfASPNETCmd websiteUrl</code></li>
+    </ul>
+  </li>
+  <li>
+    <p>Error</p>
+
+    <p>과감하게 실행하고는 아래와 같은 Error가 나타났다. 쳇.
+&gt; 오류
+&gt;
+&gt;	VSP 7008: ASP.net 예외: “웹 사이트 메타베이스에 예기치 않은 정보가 들어 있거나 메타베이스에 액세스할 수 있는 권한이 없습
+  니다. IIS 메타베이스에 액세스하려면 로컬 컴퓨터의 Administrators 그룹 멤버여야 합니다. 따라서 로컬 IIS 웹 사이트를 만들
+  거나 열 수 없습니다. 파일이 있는 폴더에 대해 읽기, 쓰기 및 수정 권한이 있으면 해당 폴더를 가리키는 파일 시스템 웹 사이트
+  를 만들어 계속할 수 있습니다.”</p>
+  </li>
+  <li>
+    <p>해결방법</p>
+
+    <p><a href="http://blogs.msdn.com/b/profiler/archive/2010/07/23/tip-fixing-vsperfaspnetcmd-metabase-errors.aspx">Tip: Fixing VSPerfASPNetCmd metabase errors</a>에 의하면 IIS의 Feature를 Turn On하면 된다고 하는데 Windows 2008은 Feature가 서버 관리자에 있다.</p>
+
+    <ul>
+      <li>IIS 6 Scripting Tools</li>
+      <li>IIS 6 WMI Compatibility</li>
+      <li>IIS Metabase and IIS 6 configuration compatibility</li>
+      <li>ASP.NET</li>
+      <li>Windows Authentication</li>
+    </ul>
+
+    <p><img src="/assets/attachments/2013-08-09-profiling-error/WindowsFeatureOn2008_001.png" alt="서버 관리자" />
+  <img src="/assets/attachments/2013-08-09-profiling-error/WindowsFeatureOn2008_002.png" alt="역할 서비스 추가" /></p>
+  </li>
+  <li>
+    <p>결과</p>
+
+    <ul>
+      <li>결과로 떨어지는 .vsp는 Visual Studio에서 보면 야무치게 잘 나온다.</li>
+      <li>Visual Studio로 Profiling을 했을 때는 Source까지 연결 되어 있던데 그 것까진 안된다.</li>
+      <li>결과로 떨어지는 csv의 한글은 Excel에서 깨져서 보인다. 응급처치(?)는 <a href="http://blog.daum.net/sualchi/13720149">여기</a></li>
+      <li>괜찮은 한국어 포스팅은 <a href="http://plantrue.tistory.com/24">여기</a></li>
+      <li>Profiling중에 다른 Command를 사용해서 확인하고 싶은게 있다면 /NoWait Option을 사용하면 된다.</li>
+    </ul>
+  </li>
+</ul>
+
+]]></content>
+	</entry>
+	
+	
+</feed>

@@ -1,0 +1,554 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+		<!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+<!-- Enable responsive viewport -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="author" content="YongWan Jo">
+
+<title>ASP.NET MVC + jQuery AJAX 에서의 Error Handling</title>
+
+<!-- jQuery UI -->
+<link href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" rel="stylesheet">
+
+<!-- Bootstrap core CSS -->
+<link href="/assets/themes/twitter/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Documentation extras -->
+<link href="/assets/themes/twitter/css/docs.css" rel="stylesheet">
+<link href="/assets/themes/twitter/css/pygments-manni.css" rel="stylesheet">
+
+<link href="/assets/themes/twitter/css-social-buttons/css/zocial.stripped.css" rel="stylesheet" type="text/css" >
+
+<!-- Favicons -->
+<link rel="icon" href="/assets/themes/twitter/favicon.ico">
+<!--
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/ico/apple-touch-icon-144-precomposed.png">
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/ico/apple-touch-icon-114-precomposed.png">
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/ico/apple-touch-icon-72-precomposed.png">
+<link rel="apple-touch-icon-precomposed" href="assets/ico/apple-touch-icon-57-precomposed.png">
+<link rel="shortcut icon" href="assets/ico/favicon.png">
+-->
+
+<!-- atom & rss feed -->
+<link href="/atom.xml" type="application/atom+xml" rel="alternate" title="Sitewide ATOM Feed">
+<link href="/rss.xml" type="application/rss+xml" rel="alternate" title="Sitewide RSS Feed">   
+  </head>
+  <body>
+		<!-- Header : Docs master nav -->
+    <header class="navbar navbar-inverse navbar-fixed-top bs-docs-nav" role="banner">
+  <div class="container">
+    <div class="navbar-header">
+      <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="/" class="navbar-brand">/* LIFE RUNS ON CODE */</a>
+    </div>
+    <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+      <ul class="nav navbar-nav navbar-right">
+				
+				
+				
+
+
+  
+    
+      
+        
+        
+        <li><a href="/archive.html">Archive</a></li>
+        
+        
+      
+    
+  
+    
+      
+    
+  
+    
+      
+        
+        
+        
+        <li class="dropdown">
+        
+          <a class="dropdown-link" href="/categories">Categories</a>
+          <a class="dropdown-toggle"><b class="caret" ></b></a>
+          
+          <div id="cat_tree" class="dropdown-menu">
+            <ul> 
+            
+              
+
+
+ 
+
+<li>
+	<a href="/categories/common-tech">common tech <span class="badge">7</span></a>
+	
+	<ul>
+	
+
+
+ 
+
+<li>
+	<a href="/categories/xml">xml <span class="badge">1</span></a>
+</li>
+
+	</ul>
+	
+	<ul>
+	
+
+
+ 
+
+<li>
+	<a href="/categories/jquery">jquery <span class="badge">3</span></a>
+</li>
+
+	</ul>
+	
+	<ul>
+	
+
+
+ 
+
+<li>
+	<a href="/categories/svg">svg <span class="badge">1</span></a>
+</li>
+
+	</ul>
+	
+	<ul>
+	
+
+
+ 
+
+<li>
+	<a href="/categories/javascript">javascript <span class="badge">1</span></a>
+</li>
+
+	</ul>
+	
+	<ul>
+	
+
+
+ 
+
+<li>
+	<a href="/categories/git">git <span class="badge">1</span></a>
+</li>
+
+	</ul>
+	
+</li>
+
+            
+              
+
+
+ 
+
+<li>
+	<a href="/categories/dot-net">.net <span class="badge">11</span></a>
+	
+	<ul>
+	
+
+
+ 
+
+<li>
+	<a href="/categories/asp-dot-net-mvc">asp.net mvc <span class="badge">5</span></a>
+</li>
+
+	</ul>
+	
+	<ul>
+	
+
+
+ 
+
+<li>
+	<a href="/categories/csharp">csharp <span class="badge">5</span></a>
+</li>
+
+	</ul>
+	
+	<ul>
+	
+
+
+ 
+
+<li>
+	<a href="/categories/asp-dot-net">asp.net <span class="badge">1</span></a>
+</li>
+
+	</ul>
+	
+</li>
+
+            
+              
+
+
+ 
+
+<li>
+	<a href="/categories/applications">applications <span class="badge">3</span></a>
+	
+	<ul>
+	
+
+
+ 
+
+<li>
+	<a href="/categories/visual-studio">visual studio <span class="badge">2</span></a>
+</li>
+
+	</ul>
+	
+</li>
+
+            
+            <ul>
+          </div>
+        </li>
+        
+      
+    
+  
+    
+      
+    
+  
+    
+      
+        
+        
+        <li><a href="/tags.html">Tags</a></li>
+        
+        
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+
+
+
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="container bs-docs-container">
+		
+<div class="page-header">
+  <h1>ASP.NET MVC + jQuery AJAX 에서의 Error Handling </h1>
+</div>
+
+<div class="date">
+	<span>29 May 2013</span>
+</div>
+<div class="content">
+	<p>자. 우리 팀에서 결론 없이 무한루프를 돌고 있는 이야기를 시작해야겠다.
+안타깝게도 결론은 UK팀에서 내겠지만.</p>
+
+<ul>
+  <li>
+    <p>Error 처리의 경우 UX 관점에서 어떤 경우 어떻게 보여줄 것인가에 대한 것이 우선 정의되어 있어야 개발자가 그 경우에 따라 개발이 가능하겠다.</p>
+  </li>
+  <li>우리 제품은 4가지의 방법으로 표현이 가능하도록 되어 있는데 UX 측면에서만 보자면
+    <ul>
+      <li>CRUD중 R을 제외한 경우 실행하기 전 Domain Model에서 자체 Validation을 제공하고 있고 이 결과(Validation Results)를 ASP.NET MVC의 ModelSatate에 넣어서 ValidationSummary()를 이용해서 보여준다.</li>
+      <li>CRUD중 R의 경우 값은 정상적이지만(즉, 그 View를 표현할 수 있는 충분한 Data를 읽어왔지만) Data의 Status에 따른 warning을 보여주어야 할 경우 ViewModel에 Message property를 추가 및 사용하여 View에 Icon과 함께 이쁘게 보여준다.</li>
+      <li>Exception의 생겼을 경우. 즉, CRUD에서 개발자가 생각하지 못했던 Exception(e.g. user가 정상적인 process를 거치지 않고 db를 업데이트하여 data가 정상적이지 않을 때 또는 Defect)이 발생하게 되면 ASP.NET MVC의 HandleErrorAttribute + Error.aspx Page를 이용해서 보여준다.</li>
+      <li>jQuery AJAX를 이용한 Exception의 출력은 jQuery Dialog를 이용해서 pop-up의 형태로 보여준다.</li>
+    </ul>
+  </li>
+  <li>
+    <p>일반적인 경우는 위의 마지막을 제외한 방법으로 해결이 가능하지만, 앞으로 Exception을 jQuery Dialog를 가지고 pop-up으로 보여주는 것은 사용하지 않기로 했다. UK의 결정.</p>
+  </li>
+  <li>
+    <p>AJAX의 CRUD(GET, POST)의 경우 모두 위의 첫번째, 두번째 방법으로 해결이 되지만 Exception은 어떻게 해결해야할지가 관건이 된다. 세 번째 방법으로 Error를 보여줄 경우 그 Page안에 Main Page로 가는 링크가 보여지고 AJAX의 정상적인 결과는 Partial View인데 Exception은 전체 PAGE가 되는 상황이 발생하기 때문이다.</p>
+  </li>
+  <li>
+    <p>이 걸 해결하는 방법은 생각외로 간단하다. Error View로 사용할 Partial View ( e.g. MyError.ascx )를 만들어서 Partial View의 Action에 [HandleError]를 사용하면 된다.</p>
+  </li>
+  <li>
+    <p>이제 조금 더 깊게 들어가서. AJAX로 파일을 업로드하기 위해서 쓰는 <a href="http://jquery.malsup.com/form/">jQuery Form Plugin</a>이 있다. 이 플러그인만 그런지 모르겠지만 이 녀석은 c#에서 error를 throw하더라도 error handler로 가지 않고 success handler로 가게끔 되어 있다.</p>
+  </li>
+  <li>
+    <p>원인은 Plugin이 response code를 어떤 경우에도 조작하지 않기 때문이라고. 아직 레벨이 낮아서 Plugin Source를 봐도 잘 이해하지는 못하겠다. 여튼 이런 경우에 Response Status를 200이 아닌 다른 녀석으로 Return하거나 특정 상태를 return해서 success에서 handling하는 방법이 있다고 한다.</p>
+  </li>
+  <li>Googling해서 찾은 가장 괜찮은 LINK는 요기 : “<a href="http://stackoverflow.com/questions/3995355/jquery-form-plugin-no-error-handling">jquery form plugin, no error handling</a>”</li>
+</ul>
+
+</div>
+
+
+<ul class="list-inline">
+	<li><i class="glyphicon glyphicon-folder-open"></i></li>
+	
+	
+
+
+  
+     
+    	<li><a href="/categories/dot-net">
+    		.net <span>11</span>
+    	</a></li>
+     
+    	<li><a href="/categories/asp-dot-net-mvc">
+    		asp.net mvc <span>5</span>
+    	</a></li>
+    
+  
+
+
+</ul>
+
+
+<ul class="list-inline">
+	<li><i class="glyphicon glyphicon-tags"></i></li>
+	
+	
+
+
+  
+     
+    	<li><a href="/tags.html#asp-dot-net-mvc-ref" data-weight=6>asp.net mvc <span>6</span></a></li>
+     
+    	<li><a href="/tags.html#jquery-ref" data-weight=4>jquery <span>4</span></a></li>
+    
+  
+
+
+
+</ul>
+
+<ul class="pagination">
+
+	<li class="prev"><a href="/2013/05/24/Design-Guidelines-for-Exceptions" title="Design Guidelines for Exceptions">&larr; Previous</a></li>
+
+	<li><a href="/archive.html">Archive</a></li>
+
+	<li class="next"><a href="/2013/08/09/profiling-asp-dot-net-stand-alone-on-windows-2008" title="Windows 2008 서버에서 ASP.NET Profiling">Next &rarr;</a></li>
+
+</ul>
+
+
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_developer = 1;
+    var disqus_shortname = 'yongwanjo'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+
+
+    </div>
+		
+		<!-- Footer -->
+    <footer class="bs-footer" role="contentinfo">
+      <div class="container">
+				<ul class="list-inline">
+	
+	<li>
+		<a href="https://github.com/yongwan" class="zocial github icon" target="_blank">
+		</a>
+	</li>
+	
+	    
+	
+	<li>
+		<a href="https://twitter.com/yongwany" class="zocial twitter icon" target="_blank">
+		</a>
+	</li>
+	                          
+	
+	<li>
+		<a href="http://www.facebook.com/yongwan.jo" class="zocial facebook icon" target="_blank">
+		</a>
+	</li>
+	           
+	                    
+	
+	
+	<li>
+		<a href="/atom.xml" class="zocial rss icon">
+		</a>
+	</li>
+	
+</ul>
+
+
+&copy; 2013 YongWan Jo All rights reserved.
+      </div>
+    </footer>
+	
+		<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+<script src="/assets/themes/twitter/bootstrap/js/bootstrap.min.js"></script>
+
+<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+  <script src="assets/js/html5shiv.js"></script>
+  <script src="assets/js/respond.min.js"></script>
+<![endif]-->
+
+<script src="/assets/themes/twitter/js/jstree/jquery.jstree.js"></script>
+<script>
+$(function() {
+  $("#cat_tree").jstree({
+    "core" : {
+      "animation" : 200
+    },
+    "plugins" : ["themes", "html_data"],
+    "themes" : {
+      "theme" : "wany",
+      "icons" : false,
+    },
+  });
+  
+  $(".dropdown-toggle").on("click", function(event) {
+    event.preventDefault();
+    $("#cat_tree").slideToggle(200);
+  });
+});
+</script>
+
+
+		
+    
+  </body>
+</html>
+

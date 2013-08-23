@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: svg | /* LIFE RUNS ON CODE */]]></title>
+  <link href="/categories/svg/atom.xml" rel="self"/>
+  <link href="/"/>
+  <updated>2013-08-23T17:11:11+09:00</updated>
+  <id>/</id>
+  <author>
+    <name><![CDATA[{"name"=>"YongWan Jo", "email"=>"yongwan.jo@wany.kr", "github"=>"yongwan", "twitter"=>"yongwany", "facebook"=>"yongwan.jo"}]]></name>
+    
+  </author>
+  <generator uri="https://github.com/recurser/jekyll-plugins">Recurser</generator>
+
+	
+	
+	<entry>
+		<title type="html"><![CDATA[Disable text selection for SVG]]></title>
+		<link href="/2012/10/18/disable-text-selection-for-svg"/>
+		<updated>2012-10-18T00:00:00+09:00</updated>
+		<id>/2012/10/18/disable-text-selection-for-svg</id>
+		<content type="html"><![CDATA[<p>문득 SVG파일에다가 WaterMark를 동적으로 넣어햐 하게 되었다.
+간단하게 Status에 따른 WaterMark를 넣어야 하는데 어떻게 저떻게 구글링을 해서 Water Mark넣는 데는 성공!</p>
+
+<p>근데 Water Mark가 SVG의 text element로 되어 있으니 워터마크에 마우스를 갖다대니 Text Selection 기능이 활성화 되는 것이 아닌가!
+워터마크란 본디 뒤에서 흐릿하게 존재해야 하는 놈이거늘…!
+그래서 찾아보니 <a href="http://www.w3.org/TR/SVG/text.html#TextSelection">SVG에서 text는 기본적으로 Selection이 가능</a>하도록 되어 있다고 한다.</p>
+
+<p>그것을 Disable 하는 기능을 Googling하니 잘 안나오더라.
+그러다가 찾은 단서가 <a href="http://tech.groups.yahoo.com/group/svg-developers/message/42866">여기</a>!
+댓글을 보면 <code>pointer-events=none</code>이라는 문구가 나오는 데 요놈을 사용하니까 된다아아아~.
+<a href="http://www.w3.org/TR/SVG/interact.html#PointerEventsProperty">W3C의 문서</a>를 참조하면 더 자세한 내용을 알수가 있다.</p>
+
+<p><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="html">1</code></pre></div></td><td class="code"><div class="highlight"><pre><span class="ni">&amp;lt;</span>text pointer-events=none<span class="ni">&amp;gt;</span>AAA<span class="ni">&amp;lt;</span>/text<span class="ni">&amp;gt;</span>
+</pre></div>
+</td></tr></table></p>
+
+<p>머 이런식.</p>
+
+]]></content>
+	</entry>
+	
+	
+</feed>

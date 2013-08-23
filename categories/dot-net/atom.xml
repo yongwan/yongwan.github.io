@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: .net | /* LIFE RUNS ON CODE */]]></title>
+  <link href="/categories/dot-net/atom.xml" rel="self"/>
+  <link href="/"/>
+  <updated>2013-08-23T17:11:11+09:00</updated>
+  <id>/</id>
+  <author>
+    <name><![CDATA[{"name"=>"YongWan Jo", "email"=>"yongwan.jo@wany.kr", "github"=>"yongwan", "twitter"=>"yongwany", "facebook"=>"yongwan.jo"}]]></name>
+    
+  </author>
+  <generator uri="https://github.com/recurser/jekyll-plugins">Recurser</generator>
+
+	
+	
+	<entry>
+		<title type="html"><![CDATA[Windows 2008 서버에서 ASP.NET Profiling]]></title>
+		<link href="/2013/08/09/profiling-asp-dot-net-stand-alone-on-windows-2008"/>
+		<updated>2013-08-09T00:00:00+09:00</updated>
+		<id>/2013/08/09/profiling-asp-dot-net-stand-alone-on-windows-2008</id>
+		<content type="html"><![CDATA[<p>요즘은 Performance Test 때문에 몇몇 팀원이 바쁘다.
+나는 다행히(?)도 그쪽 일을 하고 있지 않아 한가한데 여차저차해서 Visual Studio Profiling 기능이 팀의 이슈가 되었다.
+사실 예전에 한번 훑어 봤던 내용이기는 한데 한 번도 해보지를 않아서 이번 기회에 한 번 경험해봤다.</p>
+
+<p><a href="http://msdn.microsoft.com/en-us/library/z9z62c29(v=vs.100).aspx">Visual Studio에서의 프로파일링</a>은 권차장님께서 이미 성공하셨다.
+하지만 나는 호스트에는 VS와 DB가 Application + Web은 VM에 설치되어 있기 때문에 다른 방법이 필요했다.
+해서 내 환경에 맞게 Remote Machine에 대한 Profiling을 찾아보던 중에 <a href="http://msdn.microsoft.com/en-us/library/dd255411(v=vs.100).aspx">Stand-Alone으로 Profiling</a>을 하는 방벙을 MSDN에서 찾게 되었다.
+그리고 그와 연결되어 있던 <a href="http://msdn.microsoft.com/en-us/library/dd255401(v=vs.100).aspx">Command-Line Profiling of ASP.NET Web Applications</a>.</p>
+
+<ul>
+  <li>
+    <p>Configuration</p>
+
+    <ul>
+      <li>우리는 아직 Visual Studio 2010을 사용하고 있기 때문에 <a href="http://www.microsoft.com/ko-kr/download/details.aspx?id=23205">Visual Studio 2010 성능 도구 서비스 팩 1</a>을 다운받고 설치.</li>
+      <li>환경변수에 명령어 PATH설정<br />
+  <code>set PATH=%PATH%;"C:\Program Files (x86)\Microsoft Visual Studio 9.0\Team Tools\Performance Tools"</code></li>
+      <li>심볼 서버 설정을 위해 _NT_SYBBOL_PATH를 환경 변수에 등록<br />
+  <code>set _NT_SYBBOL_PATH=symsrv*symsrv.dll*c:\localcache*http://msdl.microsoft.com/download/symbols</code><br />
+  <em>c:\localcache</em>에 Compile시 생성된 PDB파일들을 Copy해야한다. <a href="http://msdn.microsoft.com/en-us/library/89axdy6y(v=vs.100).aspx">How to: Reference Windows Symbol Information</a></li>
+    </ul>
+  </li>
+  <li>
+    <p>실행</p>
+
+    <ul>
+      <li><code>VSPerfASPNETCmd websiteUrl</code></li>
+    </ul>
+  </li>
+  <li>
+    <p>Error</p>
+
+    <p>과감하게 실행하고는 아래와 같은 Error가 나타났다. 쳇.
+&gt; 오류
+&gt;
+&gt;	VSP 7008: ASP.net 예외: “웹 사이트 메타베이스에 예기치 않은 정보가 들어 있거나 메타베이스에 액세스할 수 있는 권한이 없습
+  니다. IIS 메타베이스에 액세스하려면 로컬 컴퓨터의 Administrators 그룹 멤버여야 합니다. 따라서 로컬 IIS 웹 사이트를 만들
+  거나 열 수 없습니다. 파일이 있는 폴더에 대해 읽기, 쓰기 및 수정 권한이 있으면 해당 폴더를 가리키는 파일 시스템 웹 사이트
+  를 만들어 계속할 수 있습니다.”</p>
+  </li>
+  <li>
+    <p>해결방법</p>
+
+    <p><a href="http://blogs.msdn.com/b/profiler/archive/2010/07/23/tip-fixing-vsperfaspnetcmd-metabase-errors.aspx">Tip: Fixing VSPerfASPNetCmd metabase errors</a>에 의하면 IIS의 Feature를 Turn On하면 된다고 하는데 Windows 2008은 Feature가 서버 관리자에 있다.</p>
+
+    <ul>
+      <li>IIS 6 Scripting Tools</li>
+      <li>IIS 6 WMI Compatibility</li>
+      <li>IIS Metabase and IIS 6 configuration compatibility</li>
+      <li>ASP.NET</li>
+      <li>Windows Authentication</li>
+    </ul>
+
+    <p><img src="/assets/attachments/2013-08-09-profiling-error/WindowsFeatureOn2008_001.png" alt="서버 관리자" />
+  <img src="/assets/attachments/2013-08-09-profiling-error/WindowsFeatureOn2008_002.png" alt="역할 서비스 추가" /></p>
+  </li>
+  <li>
+    <p>결과</p>
+
+    <ul>
+      <li>결과로 떨어지는 .vsp는 Visual Studio에서 보면 야무치게 잘 나온다.</li>
+      <li>Visual Studio로 Profiling을 했을 때는 Source까지 연결 되어 있던데 그 것까진 안된다.</li>
+      <li>결과로 떨어지는 csv의 한글은 Excel에서 깨져서 보인다. 응급처치(?)는 <a href="http://blog.daum.net/sualchi/13720149">여기</a></li>
+      <li>괜찮은 한국어 포스팅은 <a href="http://plantrue.tistory.com/24">여기</a></li>
+      <li>Profiling중에 다른 Command를 사용해서 확인하고 싶은게 있다면 /NoWait Option을 사용하면 된다.</li>
+    </ul>
+  </li>
+</ul>
+
+]]></content>
+	</entry>
+	
+	<entry>
+		<title type="html"><![CDATA[ASP.NET MVC + jQuery AJAX 에서의 Error Handling]]></title>
+		<link href="/2013/05/29/error-handling-on-jquery-ajax-on-asp-dot-net-mvc"/>
+		<updated>2013-05-29T00:00:00+09:00</updated>
+		<id>/2013/05/29/error-handling-on-jquery-ajax-on-asp-dot-net-mvc</id>
+		<content type="html"><![CDATA[<p>자. 우리 팀에서 결론 없이 무한루프를 돌고 있는 이야기를 시작해야겠다.
+안타깝게도 결론은 UK팀에서 내겠지만.</p>
+
+<ul>
+  <li>
+    <p>Error 처리의 경우 UX 관점에서 어떤 경우 어떻게 보여줄 것인가에 대한 것이 우선 정의되어 있어야 개발자가 그 경우에 따라 개발이 가능하겠다.</p>
+  </li>
+  <li>우리 제품은 4가지의 방법으로 표현이 가능하도록 되어 있는데 UX 측면에서만 보자면
+    <ul>
+      <li>CRUD중 R을 제외한 경우 실행하기 전 Domain Model에서 자체 Validation을 제공하고 있고 이 결과(Validation Results)를 ASP.NET MVC의 ModelSatate에 넣어서 ValidationSummary()를 이용해서 보여준다.</li>
+      <li>CRUD중 R의 경우 값은 정상적이지만(즉, 그 View를 표현할 수 있는 충분한 Data를 읽어왔지만) Data의 Status에 따른 warning을 보여주어야 할 경우 ViewModel에 Message property를 추가 및 사용하여 View에 Icon과 함께 이쁘게 보여준다.</li>
+      <li>Exception의 생겼을 경우. 즉, CRUD에서 개발자가 생각하지 못했던 Exception(e.g. user가 정상적인 process를 거치지 않고 db를 업데이트하여 data가 정상적이지 않을 때 또는 Defect)이 발생하게 되면 ASP.NET MVC의 HandleErrorAttribute + Error.aspx Page를 이용해서 보여준다.</li>
+      <li>jQuery AJAX를 이용한 Exception의 출력은 jQuery Dialog를 이용해서 pop-up의 형태로 보여준다.</li>
+    </ul>
+  </li>
+  <li>
+    <p>일반적인 경우는 위의 마지막을 제외한 방법으로 해결이 가능하지만, 앞으로 Exception을 jQuery Dialog를 가지고 pop-up으로 보여주는 것은 사용하지 않기로 했다. UK의 결정.</p>
+  </li>
+  <li>
+    <p>AJAX의 CRUD(GET, POST)의 경우 모두 위의 첫번째, 두번째 방법으로 해결이 되지만 Exception은 어떻게 해결해야할지가 관건이 된다. 세 번째 방법으로 Error를 보여줄 경우 그 Page안에 Main Page로 가는 링크가 보여지고 AJAX의 정상적인 결과는 Partial View인데 Exception은 전체 PAGE가 되는 상황이 발생하기 때문이다.</p>
+  </li>
+  <li>
+    <p>이 걸 해결하는 방법은 생각외로 간단하다. Error View로 사용할 Partial View ( e.g. MyError.ascx )를 만들어서 Partial View의 Action에 [HandleError]를 사용하면 된다.</p>
+  </li>
+  <li>
+    <p>이제 조금 더 깊게 들어가서. AJAX로 파일을 업로드하기 위해서 쓰는 <a href="http://jquery.malsup.com/form/">jQuery Form Plugin</a>이 있다. 이 플러그인만 그런지 모르겠지만 이 녀석은 c#에서 error를 throw하더라도 error handler로 가지 않고 success handler로 가게끔 되어 있다.</p>
+  </li>
+  <li>
+    <p>원인은 Plugin이 response code를 어떤 경우에도 조작하지 않기 때문이라고. 아직 레벨이 낮아서 Plugin Source를 봐도 잘 이해하지는 못하겠다. 여튼 이런 경우에 Response Status를 200이 아닌 다른 녀석으로 Return하거나 특정 상태를 return해서 success에서 handling하는 방법이 있다고 한다.</p>
+  </li>
+  <li>Googling해서 찾은 가장 괜찮은 LINK는 요기 : “<a href="http://stackoverflow.com/questions/3995355/jquery-form-plugin-no-error-handling">jquery form plugin, no error handling</a>”</li>
+</ul>
+]]></content>
+	</entry>
+	
+	<entry>
+		<title type="html"><![CDATA[Design Guidelines for Exceptions]]></title>
+		<link href="/2013/05/24/Design-Guidelines-for-Exceptions"/>
+		<updated>2013-05-24T00:00:00+09:00</updated>
+		<id>/2013/05/24/Design-Guidelines-for-Exceptions</id>
+		<content type="html"><![CDATA[<p>ASP.NET MVC에서 Exception 처리와 표현에 대해서 토의가 있었지만 현재까지는 결론없이 끝났다.
+결국은 UK의 결정에 따라 가겠지만 일단 우리 내부적으로 어떻게 해야할 지 그리고 그 근거는 어디에 있는지 이야기할 필요가 있다고 생각되는 한 편. 기본을 제대로 이해하지 못하고 무턱대고 삽질하는 것보다 기본을 먼저 아는 것이 필요하겠다 싶어서 예전에 봤었지만 다시한 번 정독.</p>
+
+<p>제일 필요한 부분이 <a href="http://msdn.microsoft.com/en-us/library/ms229007(v=vs.100).aspx">Catching and Throwing Standard Exception Types</a>. <a href="http://msdn.microsoft.com/ko-kr/library/ms229007(v=vs.100).aspx">한글도 지원</a>을 해주지만 번역이 이해하는 게 더 어렵다;; 내가 번역하려고 하면 더더욱 어렵다;;;</p>
+
+<h4 id="exeption-systemexception">Exeption, SystemException</h4>
+<ul>
+  <li>Eception 또는 SystemException을 던지지 마라.</li>
+  <li>re-throw를 의도한 것이 아니라면 Exception, SystemException을 Catch하지 마라. ( Log를 쓰거나 할 경우? )</li>
+  <li>top-level exception handler(Exception의 마지막 layer, MVC의 경우 Controller)가 아니라면 Exception 또는 SystemException을 Catch하지 마라.</li>
+</ul>
+
+<h4 id="applicationexception">ApplicationException</h4>
+<ul>
+  <li>ApplicationException 말고 Exception을 상속 받아라.</li>
+</ul>
+
+<h4 id="invalidoperationexception">InvalidOperationException</h4>
+<ul>
+  <li>property의 setter또는 method를 부를 때 객체의 상태가 행동을 하는데 적합하지 않다면 InvalidOperatonException을 사용하여 던져라.</li>
+</ul>
+
+<h4 id="argumentexception-argumentnullexception-and-argumentoutofrangeexception">ArgumentException, ArgumentNullException and ArgumentOutOfRangeException</h4>
+<ul>
+  <li>Argument가 적절하지 않는 녀석이 왔다면 ArgumentException 또는 그 것을 상속받은 Exception을 던져라. 가능하면 가장 하위의 Exception을 사용.</li>
+  <li>ParamName property에 값을 넣어라.</li>
+  <li>Property의 setter에서는 ParamName으로 “value”를 사용해라.
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="csharp">1
+2
+3
+4
+5
+6
+7
+8</code></pre></div></td><td class="code"><div class="highlight"><pre><span class="k">set</span>
+<span class="p">{</span>
+  <span class="k">if</span><span class="p">(</span><span class="k">value</span> <span class="p">==</span> <span class="k">null</span><span class="p">)</span>
+  <span class="p">{</span>
+      <span class="k">throw</span> <span class="k">new</span> <span class="nf">ArgumentNullException</span><span class="p">(</span><span class="err">“</span><span class="k">value</span><span class="err">”</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="n">address</span> <span class="p">=</span> <span class="k">value</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></li>
+  <li>public API에서 NullReferenceException, AccessViolationException, InvalidCastException 또는 IndexOutOfRangeException을 명시적 또는 암시적으로 던지지 못하게 하라. 이러한 Exception들을 던지는 것을 피하기 위해서 Argument들을 check하라.</li>
+</ul>
+
+<h4 id="stackoverflowexception-outofmemoryexception-comexception-sehexception-and-executionengineexception">StackOverflowException, OutOfMemoryException, ComException, SEHException and ExecutionEngineException.</h4>
+<ul>
+  <li>위 Exception들은 CRL을 통해서만 던지게 되어 있으니까 명시적으로 던지지마라. </li>
+  <li>StackOverflowException과 SEHException은 명시적으로 Catch하지 마라.</li>
+</ul>
+
+<p><del>포스팅이 조잡하군.</del></p>
+
+]]></content>
+	</entry>
+	
+	<entry>
+		<title type="html"><![CDATA[ASP .NET MVC에서 HttpContext를 이용한 Cookie Test]]></title>
+		<link href="/2013/04/30/cookie-test-on-asp-dot-net-mvc"/>
+		<updated>2013-04-30T00:00:00+09:00</updated>
+		<id>/2013/04/30/cookie-test-on-asp-dot-net-mvc</id>
+		<content type="html"><![CDATA[<p>Controller에서 내부에서 Cookie 값을 읽고 써야하는 부분이 필요하게 되었는데,
+기존의 코드가 System.Web.HttpContext.Current를 사용하여 Cookie값을 읽어오고 있었다.
+그냥 생각없이 긁어 쓰고 나서 Test Project를 만들려고 하니 머시 방법이 없다.
+그래서 구글링 ㄱㄱ. </p>
+
+<p><a href="http://stackoverflow.com/questions/785413/difference-between-httpcontext-current-and-controller-context-in-mvc-asp-net">Difference between HttpContext.Current and Controller.Context in MVC ASP.NET</a></p>
+
+<p>첫번째 답변은 Thread를 따로 만들어 사용하면 Current의 HttpContext와 Controller의 HttpContext는 다를 수가 있다. 하지만 나의 경우는 Thread를 고려할 필요가 없어서 Pass.
+두번째 답변을 보면 <strong>HttpContext의 Mocking을 위해서라면 Controller의 HttpContext를 사용</strong>할 것을 이야기 하고 있다.</p>
+
+]]></content>
+	</entry>
+	
+	<entry>
+		<title type="html"><![CDATA[Dispose, garbage collection and finalization]]></title>
+		<link href="/2012/10/26/dispose-garbage-collection-and-finalization"/>
+		<updated>2012-10-26T00:00:00+09:00</updated>
+		<id>/2012/10/26/dispose-garbage-collection-and-finalization</id>
+		<content type="html"><![CDATA[<p>객체의 생성 및 소멸과 관련해서 수정을 해야할 일이 있어서 공부를 좀 해야겠다 싶어 검색을 하다가 찾은 괜찮은 <a href="http://stackoverflow.com/questions/574019/calling-null-on-a-class-vs-dispose">포스팅</a>. 이라기 보단 답변.</p>
+
+<p>내 수준으로 굳이 번역을 하자면</p>
+
+<p>결론 : <strong>Disposal과 Garbage Collection은 전혀 별개의 문제</strong>이다.</p>
+
+<ul>
+  <li>
+    <p><strong>using Statement</strong>는 단순히 문법적으로 try/finally 문장을 쉽게 표현한 녀석.
+  using안에서 Dispose() 부르던 안부르던 Exception이 떨어지던 안 떨이지던 Dispose()를 항상 부르게 만들어 놓은 녀석.
+  그래서 using문 안에 들어가는 객체는 IDisposable이 Implementation되어 있어야 한다.</p>
+  </li>
+  <li>
+    <p><strong>Disposal</strong>은 unmanaged resources(non-memory resources)에 대한 녀석이다.
+  UI, 네트워크 접속, 파일 등과 제어되지 않는 제한된 Resource에 대한 핸들링을 위해서 Implementation된다.</p>
+  </li>
+  <li>
+    <p><strong>Garbage Collection</strong>은 단지 Memory에 대한 핸들링이다.
+  Garbage Collector는 더 이상 참조되지 않는 객체를 찾아서 Release해주는 역할을 하지만 항상 돌아가는 건 아니다.</p>
+  </li>
+  <li>
+    <p><strong>Finalizer</strong>는 개발자가 Dispose를 명시적으로 해주여야 하는 데 이를 지키지 않았을 때를 대비해서 Unmanaged Resources를 Release하기 위해 작성한다.
+  하지만 적상적인 패턴으로 개발을 한 경우라면 Finalizer는 실행되지 않을 것이다.</p>
+  </li>
+  <li>
+    <p><strong>Setting a variable to null</strong>은	Garbage Collection으로 인해서 null로 asign하는 것은 의미가 없다.
+  지역변수에서는 JIT(?)가 충분히 똘똘하기 때문에 variable을 추후에 사용할지 안 할지에 대해서 판단할 수 있다.
+  멤버변수(전역변수)일 때도 거의 필요없기는 하지만 null로 세팅하는 것이 필요할 때도 있다.</p>
+  </li>
+</ul>
+
+<p>대부분의 경우 Finalizer의 Implementation은 필요가 없다.</p>
+
+<p>추가 참고 : Connection은 가장 늦게 Open해서 가장 빨리 Close해라. 제한된 Resource이기 때문에.</p>
+
+]]></content>
+	</entry>
+	
+	
+</feed>

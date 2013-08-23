@@ -1,0 +1,536 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+		<!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+<!-- Enable responsive viewport -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="author" content="YongWan Jo">
+
+<title>ASP .NET MVC에서 HttpContext를 이용한 Cookie Test</title>
+
+<!-- jQuery UI -->
+<link href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" rel="stylesheet">
+
+<!-- Bootstrap core CSS -->
+<link href="/assets/themes/twitter/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Documentation extras -->
+<link href="/assets/themes/twitter/css/docs.css" rel="stylesheet">
+<link href="/assets/themes/twitter/css/pygments-manni.css" rel="stylesheet">
+
+<link href="/assets/themes/twitter/css-social-buttons/css/zocial.stripped.css" rel="stylesheet" type="text/css" >
+
+<!-- Favicons -->
+<link rel="icon" href="/assets/themes/twitter/favicon.ico">
+<!--
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/ico/apple-touch-icon-144-precomposed.png">
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/ico/apple-touch-icon-114-precomposed.png">
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/ico/apple-touch-icon-72-precomposed.png">
+<link rel="apple-touch-icon-precomposed" href="assets/ico/apple-touch-icon-57-precomposed.png">
+<link rel="shortcut icon" href="assets/ico/favicon.png">
+-->
+
+<!-- atom & rss feed -->
+<link href="/atom.xml" type="application/atom+xml" rel="alternate" title="Sitewide ATOM Feed">
+<link href="/rss.xml" type="application/rss+xml" rel="alternate" title="Sitewide RSS Feed">   
+  </head>
+  <body>
+		<!-- Header : Docs master nav -->
+    <header class="navbar navbar-inverse navbar-fixed-top bs-docs-nav" role="banner">
+  <div class="container">
+    <div class="navbar-header">
+      <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="/" class="navbar-brand">/* LIFE RUNS ON CODE */</a>
+    </div>
+    <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+      <ul class="nav navbar-nav navbar-right">
+				
+				
+				
+
+
+  
+    
+      
+        
+        
+        <li><a href="/archive.html">Archive</a></li>
+        
+        
+      
+    
+  
+    
+      
+    
+  
+    
+      
+        
+        
+        
+        <li class="dropdown">
+        
+          <a class="dropdown-link" href="/categories">Categories</a>
+          <a class="dropdown-toggle"><b class="caret" ></b></a>
+          
+          <div id="cat_tree" class="dropdown-menu">
+            <ul> 
+            
+              
+
+
+ 
+
+<li>
+	<a href="/categories/common-tech">common tech <span class="badge">7</span></a>
+	
+	<ul>
+	
+
+
+ 
+
+<li>
+	<a href="/categories/xml">xml <span class="badge">1</span></a>
+</li>
+
+	</ul>
+	
+	<ul>
+	
+
+
+ 
+
+<li>
+	<a href="/categories/jquery">jquery <span class="badge">3</span></a>
+</li>
+
+	</ul>
+	
+	<ul>
+	
+
+
+ 
+
+<li>
+	<a href="/categories/svg">svg <span class="badge">1</span></a>
+</li>
+
+	</ul>
+	
+	<ul>
+	
+
+
+ 
+
+<li>
+	<a href="/categories/javascript">javascript <span class="badge">1</span></a>
+</li>
+
+	</ul>
+	
+	<ul>
+	
+
+
+ 
+
+<li>
+	<a href="/categories/git">git <span class="badge">1</span></a>
+</li>
+
+	</ul>
+	
+</li>
+
+            
+              
+
+
+ 
+
+<li>
+	<a href="/categories/dot-net">.net <span class="badge">11</span></a>
+	
+	<ul>
+	
+
+
+ 
+
+<li>
+	<a href="/categories/asp-dot-net-mvc">asp.net mvc <span class="badge">5</span></a>
+</li>
+
+	</ul>
+	
+	<ul>
+	
+
+
+ 
+
+<li>
+	<a href="/categories/csharp">csharp <span class="badge">5</span></a>
+</li>
+
+	</ul>
+	
+	<ul>
+	
+
+
+ 
+
+<li>
+	<a href="/categories/asp-dot-net">asp.net <span class="badge">1</span></a>
+</li>
+
+	</ul>
+	
+</li>
+
+            
+              
+
+
+ 
+
+<li>
+	<a href="/categories/applications">applications <span class="badge">3</span></a>
+	
+	<ul>
+	
+
+
+ 
+
+<li>
+	<a href="/categories/visual-studio">visual studio <span class="badge">2</span></a>
+</li>
+
+	</ul>
+	
+</li>
+
+            
+            <ul>
+          </div>
+        </li>
+        
+      
+    
+  
+    
+      
+    
+  
+    
+      
+        
+        
+        <li><a href="/tags.html">Tags</a></li>
+        
+        
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+
+
+
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="container bs-docs-container">
+		
+<div class="page-header">
+  <h1>ASP .NET MVC에서 HttpContext를 이용한 Cookie Test </h1>
+</div>
+
+<div class="date">
+	<span>30 April 2013</span>
+</div>
+<div class="content">
+	<p>Controller에서 내부에서 Cookie 값을 읽고 써야하는 부분이 필요하게 되었는데,
+기존의 코드가 System.Web.HttpContext.Current를 사용하여 Cookie값을 읽어오고 있었다.
+그냥 생각없이 긁어 쓰고 나서 Test Project를 만들려고 하니 머시 방법이 없다.
+그래서 구글링 ㄱㄱ. </p>
+
+<p><a href="http://stackoverflow.com/questions/785413/difference-between-httpcontext-current-and-controller-context-in-mvc-asp-net">Difference between HttpContext.Current and Controller.Context in MVC ASP.NET</a></p>
+
+<p>첫번째 답변은 Thread를 따로 만들어 사용하면 Current의 HttpContext와 Controller의 HttpContext는 다를 수가 있다. 하지만 나의 경우는 Thread를 고려할 필요가 없어서 Pass.
+두번째 답변을 보면 <strong>HttpContext의 Mocking을 위해서라면 Controller의 HttpContext를 사용</strong>할 것을 이야기 하고 있다.</p>
+
+
+</div>
+
+
+<ul class="list-inline">
+	<li><i class="glyphicon glyphicon-folder-open"></i></li>
+	
+	
+
+
+  
+     
+    	<li><a href="/categories/dot-net">
+    		.net <span>11</span>
+    	</a></li>
+     
+    	<li><a href="/categories/asp-dot-net-mvc">
+    		asp.net mvc <span>5</span>
+    	</a></li>
+    
+  
+
+
+</ul>
+
+
+<ul class="list-inline">
+	<li><i class="glyphicon glyphicon-tags"></i></li>
+	
+	
+
+
+  
+     
+    	<li><a href="/tags.html#dot-net-ref" data-weight=1>.net <span>1</span></a></li>
+     
+    	<li><a href="/tags.html#asp-dot-net-mvc-ref" data-weight=6>asp.net mvc <span>6</span></a></li>
+     
+    	<li><a href="/tags.html#test-ref" data-weight=1>test <span>1</span></a></li>
+     
+    	<li><a href="/tags.html#cookie-ref" data-weight=1>cookie <span>1</span></a></li>
+    
+  
+
+
+
+</ul>
+
+<ul class="pagination">
+
+	<li class="prev"><a href="/2013/04/30/changing-offset-of-a-cell-on-ie9" title="IE9에서 Table의 한 Row에서 특정 Cell의 Offset이 달라지는 현상">&larr; Previous</a></li>
+
+	<li><a href="/archive.html">Archive</a></li>
+
+	<li class="next"><a href="/2013/05/02/jQuery-bind-live-delegate-on" title=".bind(), .live(), .delegate() and on()">Next &rarr;</a></li>
+
+</ul>
+
+
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_developer = 1;
+    var disqus_shortname = 'yongwanjo'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+
+
+    </div>
+		
+		<!-- Footer -->
+    <footer class="bs-footer" role="contentinfo">
+      <div class="container">
+				<ul class="list-inline">
+	
+	<li>
+		<a href="https://github.com/yongwan" class="zocial github icon" target="_blank">
+		</a>
+	</li>
+	
+	    
+	
+	<li>
+		<a href="https://twitter.com/yongwany" class="zocial twitter icon" target="_blank">
+		</a>
+	</li>
+	                          
+	
+	<li>
+		<a href="http://www.facebook.com/yongwan.jo" class="zocial facebook icon" target="_blank">
+		</a>
+	</li>
+	           
+	                    
+	
+	
+	<li>
+		<a href="/atom.xml" class="zocial rss icon">
+		</a>
+	</li>
+	
+</ul>
+
+
+&copy; 2013 YongWan Jo All rights reserved.
+      </div>
+    </footer>
+	
+		<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+<script src="/assets/themes/twitter/bootstrap/js/bootstrap.min.js"></script>
+
+<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+  <script src="assets/js/html5shiv.js"></script>
+  <script src="assets/js/respond.min.js"></script>
+<![endif]-->
+
+<script src="/assets/themes/twitter/js/jstree/jquery.jstree.js"></script>
+<script>
+$(function() {
+  $("#cat_tree").jstree({
+    "core" : {
+      "animation" : 200
+    },
+    "plugins" : ["themes", "html_data"],
+    "themes" : {
+      "theme" : "wany",
+      "icons" : false,
+    },
+  });
+  
+  $(".dropdown-toggle").on("click", function(event) {
+    event.preventDefault();
+    $("#cat_tree").slideToggle(200);
+  });
+});
+</script>
+
+
+		
+    
+  </body>
+</html>
+

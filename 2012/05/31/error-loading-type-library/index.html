@@ -1,0 +1,536 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+		<!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+<!-- Enable responsive viewport -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="author" content="YongWan Jo">
+
+<title>Error loading type library/DLL. (Exception from HRESULT: 0x80029C4A (TYPE_E_CANTLOADLIBRARY))</title>
+
+<!-- jQuery UI -->
+<link href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" rel="stylesheet">
+
+<!-- Bootstrap core CSS -->
+<link href="/assets/themes/twitter/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Documentation extras -->
+<link href="/assets/themes/twitter/css/docs.css" rel="stylesheet">
+<link href="/assets/themes/twitter/css/pygments-manni.css" rel="stylesheet">
+
+<link href="/assets/themes/twitter/css-social-buttons/css/zocial.stripped.css" rel="stylesheet" type="text/css" >
+
+<!-- Favicons -->
+<link rel="icon" href="/assets/themes/twitter/favicon.ico">
+<!--
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/ico/apple-touch-icon-144-precomposed.png">
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/ico/apple-touch-icon-114-precomposed.png">
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/ico/apple-touch-icon-72-precomposed.png">
+<link rel="apple-touch-icon-precomposed" href="assets/ico/apple-touch-icon-57-precomposed.png">
+<link rel="shortcut icon" href="assets/ico/favicon.png">
+-->
+
+<!-- atom & rss feed -->
+<link href="/atom.xml" type="application/atom+xml" rel="alternate" title="Sitewide ATOM Feed">
+<link href="/rss.xml" type="application/rss+xml" rel="alternate" title="Sitewide RSS Feed">   
+  </head>
+  <body>
+		<!-- Header : Docs master nav -->
+    <header class="navbar navbar-inverse navbar-fixed-top bs-docs-nav" role="banner">
+  <div class="container">
+    <div class="navbar-header">
+      <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="/" class="navbar-brand">/* LIFE RUNS ON CODE */</a>
+    </div>
+    <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+      <ul class="nav navbar-nav navbar-right">
+				
+				
+				
+
+
+  
+    
+      
+        
+        
+        <li><a href="/archive.html">Archive</a></li>
+        
+        
+      
+    
+  
+    
+      
+    
+  
+    
+      
+        
+        
+        
+        <li class="dropdown">
+        
+          <a class="dropdown-link" href="/categories">Categories</a>
+          <a class="dropdown-toggle"><b class="caret" ></b></a>
+          
+          <div id="cat_tree" class="dropdown-menu">
+            <ul> 
+            
+              
+
+
+ 
+
+<li>
+	<a href="/categories/common-tech">common tech <span class="badge">7</span></a>
+	
+	<ul>
+	
+
+
+ 
+
+<li>
+	<a href="/categories/xml">xml <span class="badge">1</span></a>
+</li>
+
+	</ul>
+	
+	<ul>
+	
+
+
+ 
+
+<li>
+	<a href="/categories/jquery">jquery <span class="badge">3</span></a>
+</li>
+
+	</ul>
+	
+	<ul>
+	
+
+
+ 
+
+<li>
+	<a href="/categories/svg">svg <span class="badge">1</span></a>
+</li>
+
+	</ul>
+	
+	<ul>
+	
+
+
+ 
+
+<li>
+	<a href="/categories/javascript">javascript <span class="badge">1</span></a>
+</li>
+
+	</ul>
+	
+	<ul>
+	
+
+
+ 
+
+<li>
+	<a href="/categories/git">git <span class="badge">1</span></a>
+</li>
+
+	</ul>
+	
+</li>
+
+            
+              
+
+
+ 
+
+<li>
+	<a href="/categories/dot-net">.net <span class="badge">11</span></a>
+	
+	<ul>
+	
+
+
+ 
+
+<li>
+	<a href="/categories/asp-dot-net-mvc">asp.net mvc <span class="badge">5</span></a>
+</li>
+
+	</ul>
+	
+	<ul>
+	
+
+
+ 
+
+<li>
+	<a href="/categories/csharp">csharp <span class="badge">5</span></a>
+</li>
+
+	</ul>
+	
+	<ul>
+	
+
+
+ 
+
+<li>
+	<a href="/categories/asp-dot-net">asp.net <span class="badge">1</span></a>
+</li>
+
+	</ul>
+	
+</li>
+
+            
+              
+
+
+ 
+
+<li>
+	<a href="/categories/applications">applications <span class="badge">3</span></a>
+	
+	<ul>
+	
+
+
+ 
+
+<li>
+	<a href="/categories/visual-studio">visual studio <span class="badge">2</span></a>
+</li>
+
+	</ul>
+	
+</li>
+
+            
+            <ul>
+          </div>
+        </li>
+        
+      
+    
+  
+    
+      
+    
+  
+    
+      
+        
+        
+        <li><a href="/tags.html">Tags</a></li>
+        
+        
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+
+
+
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="container bs-docs-container">
+		
+<div class="page-header">
+  <h1>Error loading type library/DLL. (Exception from HRESULT: 0x80029C4A (TYPE_E_CANTLOADLIBRARY)) </h1>
+</div>
+
+<div class="date">
+	<span>31 May 2012</span>
+</div>
+<div class="content">
+	<p>다른 컴퓨터에서는 정상적으로 돌아가는 데 유독 DEMO를 하려는 Machine에서만 아래와 같은 Error가 났다.</p>
+
+<pre><code>Error loading type library/DLL. (Exception from HRESULT: 0x80029C4A (TYPE_E_CANTLOADLIBRARY))
+</code></pre>
+
+<p>시스템 문제인 줄 알고 하루 반나절을 미친듯이 이리저리 뒤적거렸었는 데 결국은 Googling으로 해결.</p>
+
+<p>몇몇 포스팅에서는 .NET framework가 정상적으로 설치가 되지 않아서 인 경우도 있고 했는데 나의 경우는 그 보다는 이전 시스템의 Garbage Data가 있어서 문제였었다.</p>
+
+<p>해결한 방법은 결국 <a href="http://technet.microsoft.com/en-us/sysinternals/bb896645">Process Monitor</a>을 이용해서 Error를 추적.
+특정 COM DLL의 Path가 x64와 x32 모두에 세팅이 되어 있고 값은 x64의 값을 읽는데 여기 있는 값이 이전 시스템이 적어 놓은 것이었다는 것.
+제거시에 정상적으로 제거되지 않았던 듯하다.
+Googling으로 찾은 Posting에는 <a href="http://technet.microsoft.com/en-us/sysinternals/bb896642.aspx">FileMon</a>, RegMon이라는 Utility를 사용하라고 되어 있는데 이 링크를 타서 가보면 알겠지만 이 Utility가 Process Monitor로 바뀌었다고 되어 있다.</p>
+
+<p>여튼 이 Utility 좀 짱인듯. 이걸로 Process Filter/Capture해서 Error나는 부분을 확인하니까 <strong>COM DLL이 엄한 곳을 읽려고 시도하다가 FAIL 나는 것을 확인</strong>해서 해결!!</p>
+
+
+</div>
+
+
+<ul class="list-inline">
+	<li><i class="glyphicon glyphicon-folder-open"></i></li>
+	
+	
+
+
+  
+     
+    	<li><a href="/categories/applications">
+    		applications <span>3</span>
+    	</a></li>
+    
+  
+
+
+</ul>
+
+
+<ul class="list-inline">
+	<li><i class="glyphicon glyphicon-tags"></i></li>
+	
+	
+
+
+  
+     
+    	<li><a href="/tags.html#error-ref" data-weight=1>error <span>1</span></a></li>
+     
+    	<li><a href="/tags.html#0x80029c4a-ref" data-weight=1>0x80029C4A <span>1</span></a></li>
+     
+    	<li><a href="/tags.html#type-e-cantloadlibrary-ref" data-weight=1>TYPE_E_CANTLOADLIBRARY <span>1</span></a></li>
+    
+  
+
+
+
+</ul>
+
+<ul class="pagination">
+
+	<li class="prev"><a href="/2012/05/22/csrf-in-asp-dot-net-mvc" title="Cross-Site Request Forgery(CSRF) in ASP.NET MVC">&larr; Previous</a></li>
+
+	<li><a href="/archive.html">Archive</a></li>
+
+	<li class="next"><a href="/2012/05/31/linq-and-productivity" title="LINQ와 생산성">Next &rarr;</a></li>
+
+</ul>
+
+
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_developer = 1;
+    var disqus_shortname = 'yongwanjo'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+
+
+    </div>
+		
+		<!-- Footer -->
+    <footer class="bs-footer" role="contentinfo">
+      <div class="container">
+				<ul class="list-inline">
+	
+	<li>
+		<a href="https://github.com/yongwan" class="zocial github icon" target="_blank">
+		</a>
+	</li>
+	
+	    
+	
+	<li>
+		<a href="https://twitter.com/yongwany" class="zocial twitter icon" target="_blank">
+		</a>
+	</li>
+	                          
+	
+	<li>
+		<a href="http://www.facebook.com/yongwan.jo" class="zocial facebook icon" target="_blank">
+		</a>
+	</li>
+	           
+	                    
+	
+	
+	<li>
+		<a href="/atom.xml" class="zocial rss icon">
+		</a>
+	</li>
+	
+</ul>
+
+
+&copy; 2013 YongWan Jo All rights reserved.
+      </div>
+    </footer>
+	
+		<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+<script src="/assets/themes/twitter/bootstrap/js/bootstrap.min.js"></script>
+
+<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+  <script src="assets/js/html5shiv.js"></script>
+  <script src="assets/js/respond.min.js"></script>
+<![endif]-->
+
+<script src="/assets/themes/twitter/js/jstree/jquery.jstree.js"></script>
+<script>
+$(function() {
+  $("#cat_tree").jstree({
+    "core" : {
+      "animation" : 200
+    },
+    "plugins" : ["themes", "html_data"],
+    "themes" : {
+      "theme" : "wany",
+      "icons" : false,
+    },
+  });
+  
+  $(".dropdown-toggle").on("click", function(event) {
+    event.preventDefault();
+    $("#cat_tree").slideToggle(200);
+  });
+});
+</script>
+
+
+		
+    
+  </body>
+</html>
+
