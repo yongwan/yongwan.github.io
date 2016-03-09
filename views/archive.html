@@ -1,0 +1,16 @@
+<div class="container bs-docs-container">
+  <div class="row" ng-repeat="(year, postsByYear) in posts | groupBy: 'year'">
+    <div class="col-xs-12">
+      <h2>{{year}}</h2>
+      <div ng-repeat="(month, postsByMonth) in postsByYear | groupBy: 'month'">
+        <h3>{{month}}</h3>
+        <ul>
+          <li data-ng-repeat="post in postsByMonth">
+            <h4><a ng-href="#{{post.url}}">{{post.title}}</a><br><small>{{post.date | date:'longDate'}}</small></h4>
+            <div marked="post.excerpt"></div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

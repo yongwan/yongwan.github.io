@@ -1,0 +1,15 @@
+<div class="container bs-docs-container">
+  
+  <div class="content" marked="post.content"></div>
+
+  <ul class="list-inline">
+    <li><i class="glyphicon glyphicon-folder-open"></i></li>
+    <li ng-repeat="category in post.categories">{{ category }}</li>
+  </ul>
+  <ul class="list-inline">
+    <li><i class="glyphicon glyphicon-tags"></i></li>
+    <li ng-repeat="tag in post.tags">{{ tag }}</li>
+  </ul>
+  
+  <uib-pagination total-items="page.posts.length" items-per-page="page.itemsPerPage" ng-model="page.currentPage" max-size="page.maxSize" class="pagination-sm" boundary-links="true" force-ellipses="true" ng-change="pageChanged()"></uib-pagination>
+</div>
