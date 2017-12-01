@@ -1,0 +1,36 @@
+import { Component, OnInit } from '@angular/core';
+import { Post } from '../post';
+import { PostService } from '../post.service';
+
+@Component({
+  selector: 'app-home',
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.css']
+})
+export class HomeComponent implements OnInit {
+  currentPosts: Post[];
+  currentPage: number;
+
+  constructor(
+    private postService: PostService
+  ) {
+  }
+
+  ngOnInit() {
+    this.currentPage = 1;
+    this.currentPosts = [];
+    this.appendPost();
+  }
+
+  onScroll(): void {
+    this.currentPage = this.currentPage + 1;
+    this.appendPost();
+  }
+
+  appendPost(): void {
+    this.postService.getPostsByPage(this.currentPage)
+      .subscribe(posts => this.currentPosts = this.currentPosts.concat(posts));
+  }
+
+
+}
