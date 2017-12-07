@@ -1,0 +1,14 @@
+{
+  "title": "/* LIFE RUNS ON CODE */",
+  "author": {
+    "name": "YongWan Jo",
+    "email": "yongwan.jo@wany.kr",
+    "links": [
+      {"title": "GitHub", "url": "https://github.com/yongwan", "cssClass": "fa fa-github fa-lg"}
+    ]
+  },
+  "navs": [
+    { "title": "Posts", "url": "posts" },
+    { "title": "About", "url": "about" }
+  ]
+}
