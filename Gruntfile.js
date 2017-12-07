@@ -48,12 +48,12 @@ module.exports = function(grunt) {
             /^src\/(.*)/,
             "$1"
           );
-          // app/posts/2012/2012-05-11-xsd-string-data-types.md -> /posts/2012/05/11/xsd-string-data-types
+          // src/assets/posts/2012/2012-05-11-xsd-string-data-types.md -> /posts/2012/05/11/xsd-string-data-types
           result.url = filepath.replace(
             /^src\/assets\/(posts)\/((19|20)\d\d)\/((19|20)\d\d)-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])-(.*).md$/,
             "$1/$4/$6/$7/$8"
           );
-          // app/posts/2012/2012-05-11-xsd-string-data-types.md -> 2012-05-11
+          // src/assets/posts/2012/2012-05-11-xsd-string-data-types.md -> 2012-05-11
           result.date = filepath.replace(
             /^src\/assets\/(posts)\/((19|20)\d\d)\/((19|20)\d\d)-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])-(.*).md$/,
             "$4-$6-$7"
