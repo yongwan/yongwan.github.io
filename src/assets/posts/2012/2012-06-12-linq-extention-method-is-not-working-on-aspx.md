@@ -1,9 +1,3 @@
----
-title: "aspx에서 LINQ extention method의 intelligence가 작동하지 않을 때"
-categories: ["applications", "visual studio"]
-tags: ["visual studio", "linq", "extention method", "intelligence"]
----
-
 # aspx에서 LINQ extention method의 intelligence가 작동하지 않을 때
 ___
 

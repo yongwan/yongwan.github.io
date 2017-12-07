@@ -1,9 +1,3 @@
----
-title: "나를 위한 GitHub Page 설정"
-categories: ["common tech", "git"]
-tags: ["git", "github", "configuration"]
----
-
 # 나를 위한 GitHub Page 설정
 ___
 

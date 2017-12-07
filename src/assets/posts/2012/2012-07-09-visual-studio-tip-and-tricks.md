@@ -1,9 +1,3 @@
----
-title: "Visual Studio Tips & Tricks"
-categories: ["applications", "visual studio"]
-tags: ["visual studio 2010", "tip", "Productivity Power Tools", "팁"]
----
-
 # Visual Studio Tips & Tricks
 ___
 

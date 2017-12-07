@@ -1,9 +1,3 @@
----
-title: "LINQ와 생산성"
-categories: [".net", "csharp"]
-tags: ["c#", "linq", "procutivity", "생산성"]
----
-
 # LINQ와 생산성
 ___
 

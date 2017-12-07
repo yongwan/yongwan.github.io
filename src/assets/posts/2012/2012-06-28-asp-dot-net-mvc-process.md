@@ -1,9 +1,3 @@
----
-title: "ASP .NET MVC 프로세스"
-categories: [".net", "asp.net mvc"]
-tags: ["asp.net mvc", "process", "routing", "defaultcontrollerfactory"]
----
-
 # ASP .NET MVC 프로세스
 ___
 

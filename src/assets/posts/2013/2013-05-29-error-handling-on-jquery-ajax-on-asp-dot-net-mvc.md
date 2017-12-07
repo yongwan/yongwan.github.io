@@ -1,9 +1,3 @@
----
-title: "ASP.NET MVC + jQuery AJAX 에서의 Error Handling"
-categories: [".net", "asp.net mvc"]
-tags: ["asp.net mvc", "jquery"]
----
-
 # ASP.NET MVC + jQuery AJAX 에서의 Error Handling
 ___
 

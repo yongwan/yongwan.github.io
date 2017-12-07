@@ -1,9 +1,3 @@
----
-title: "Javascript 정리"
-categories: ["common tech", "javascript"]
-tags: ["javascript", "정리"]
----
-
 # Javascript 정리
 ___
 

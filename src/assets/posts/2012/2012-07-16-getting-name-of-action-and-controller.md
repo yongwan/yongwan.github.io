@@ -1,9 +1,3 @@
----
-title: "View에서 Controller와 Action 이름 가져오는 방법"
-categories: [".net", "asp.net mvc"]
-tags: ["asp.net mvc", "name", "action", "controller", "view"]
----
-
 # View에서 Controller와 Action 이름 가져오는 방법
 ___
 

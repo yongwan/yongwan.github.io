@@ -1,9 +1,3 @@
----
-title: "Design Guidelines for Exceptions"
-categories: [".net", "csharp"]
-tags: ["c#", "exception"]
----
-
 # Design Guidelines for Exceptions
 ___
 

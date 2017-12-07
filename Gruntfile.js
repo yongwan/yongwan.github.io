@@ -18,10 +18,8 @@ module.exports = function(grunt) {
 
     grunt.log.writeln(this.target);
 
-    var jsyaml = require("js-yaml");
+    // var jsyaml = require("js-yaml");
 
-    var contents = [];
-    var yamls = [];
     var postsJson = [];
 
     this.files.forEach(function(file) {
@@ -40,10 +38,12 @@ module.exports = function(grunt) {
           // Read and return the file's source.
           var content = grunt.file.read(filepath);
 
-          var jekyllMarkdown = /---([\s\S]*)---([\s\S]*)/.exec(content);
-          var yaml = jsyaml.load(jekyllMarkdown[1]);
-
-          var result = yaml;
+          var markdownContent = /^# (.*)\r\n_{1,}\r\n\r\n([\s\S]*)*/.exec(content);
+          var title = markdownContent[1];
+          var excerpt = markdownContent[2].split("\r\n\r\n")[0];
+          
+          var result = {};
+          result.title = title;
           result.filepath = filepath.replace(
             /^src\/(.*)/,
             "$1"
@@ -58,7 +58,7 @@ module.exports = function(grunt) {
             /^src\/assets\/(posts)\/((19|20)\d\d)\/((19|20)\d\d)-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])-(.*).md$/,
             "$4-$6-$7"
           );
-          result.excerpt = jekyllMarkdown[2].split("\r\n\r\n")[2];
+          result.excerpt = excerpt;
 
           postsJson.unshift(result);
         });

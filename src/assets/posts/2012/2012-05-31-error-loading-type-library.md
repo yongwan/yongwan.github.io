@@ -1,9 +1,3 @@
----
-title: "Error loading type library/DLL. (Exception from HRESULT: 0x80029C4A (TYPE_E_CANTLOADLIBRARY))"
-categories: ["applications"]
-tags: ["error", "0x80029C4A", "TYPE_E_CANTLOADLIBRARY"]
----
-
 # Error loading type library/DLL. (Exception from HRESULT: 0x80029C4A (TYPE_E_CANTLOADLIBRARY))
 ___
 

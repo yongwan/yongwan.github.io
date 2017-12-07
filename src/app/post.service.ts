@@ -53,11 +53,7 @@ export class PostService {
   }
 
   public getPostContent(filePath: string): Observable<string> {
-    const content = this.http.get(filePath, { responseType: 'text' })
-      .map(data => {
-        const markdown = /---([\s\S]*)---([\s\S]*)/.exec(data)
-        return markdown[2];
-      });
+    const content = this.http.get(filePath, { responseType: 'text' });
 
     return content;
   }

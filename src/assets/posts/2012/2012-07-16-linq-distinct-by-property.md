@@ -1,9 +1,3 @@
----
-title: "[LINQ] 프로퍼티를 이용한 중복 제거 ( Distinct by property )"
-categories: [".net", "csharp"]
-tags: ["c#", "linq", "distinct", "프로퍼티", "중복제거"]
----
-
 # [LINQ] 프로퍼티를 이용한 중복 제거 ( Distinct by property )
 ___
 

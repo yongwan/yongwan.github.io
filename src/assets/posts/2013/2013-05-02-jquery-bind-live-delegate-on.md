@@ -1,9 +1,3 @@
----
-title: ".bind(), .live(), .delegate() and on()"
-categories: ["common tech", "jquery"]
-tags: ["jquery", "live", "click", "on"]
----
-
 # .bind(), .live(), .delegate() and on()
 ___
 

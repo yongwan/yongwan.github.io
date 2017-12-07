@@ -1,9 +1,3 @@
----
-title: "Disable text selection for SVG"
-categories: ["common tech", "svg"]
-tags: ["svg", "disable text selection", "글자선택기능방지"]
----
-
 # Disable text selection for SVG
 ___
 

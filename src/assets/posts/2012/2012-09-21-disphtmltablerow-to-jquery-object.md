@@ -1,9 +1,3 @@
----
-title: "DispHtmlTableRow to jQuery object"
-categories: ["common tech", "jquery"]
-tags: ["jquery", "disphtmltablerow", "closest", "parents"]
----
-
 # DispHtmlTableRow to jQuery object
 ___
 

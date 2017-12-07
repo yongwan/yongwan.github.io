@@ -1,9 +1,3 @@
----
-title: "XSD String Data Types"
-categories: ["common tech", "xml"]
-tags: ["xsd", "data type"]
----
-
 # XSD String Data Types
 ___
 

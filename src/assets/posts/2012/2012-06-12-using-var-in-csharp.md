@@ -1,9 +1,3 @@
----
-title: "C# - var 키워드의 사용"
-categories: [".net", "csharp"]
-tags: ["c#", "var"]
----
-
 # C# - var 키워드의 사용
 ___
 

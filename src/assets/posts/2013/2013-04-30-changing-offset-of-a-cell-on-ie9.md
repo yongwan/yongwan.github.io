@@ -1,9 +1,3 @@
----
-title: "IE9에서 Table의 한 Row에서 특정 Cell의 Offset이 달라지는 현상"
-categories: ["common tech", "jquery"]
-tags: ["jquery", "ajax", "html", "table", "offset", "ie9"]
----
-
 # IE9에서 Table의 한 Row에서 특정 Cell의 Offset이 달라지는 현상
 ___
 

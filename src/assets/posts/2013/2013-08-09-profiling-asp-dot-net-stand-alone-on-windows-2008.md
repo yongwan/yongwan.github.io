@@ -1,9 +1,3 @@
----
-title: "Windows 2008 서버에서 ASP.NET Profiling"
-categories: [".net", "asp.net"]
-tags: ["profiling", "asp.net", "asp.net mvc", "visual studio", "windows 2008", "vsp 7008"]
----
-
 # Windows 2008 서버에서 ASP.NET Profiling
 ___
 

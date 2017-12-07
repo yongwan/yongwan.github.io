@@ -1,9 +1,3 @@
----
-title: "ASP .NET MVC에서 HttpContext를 이용한 Cookie Test"
-categories: [".net", "asp.net mvc"]
-tags: [".net", "asp.net mvc", "test", "cookie"]
----
-
 # ASP .NET MVC에서 HttpContext를 이용한 Cookie Test
 ___
 

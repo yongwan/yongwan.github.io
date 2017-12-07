@@ -1,9 +1,3 @@
----
-title: "GIT 발표자료"
-categories: ["common tech", "git"]
-tags: ["git", "발표자료"]
----
-
 # GIT 발표자료
 ___
 

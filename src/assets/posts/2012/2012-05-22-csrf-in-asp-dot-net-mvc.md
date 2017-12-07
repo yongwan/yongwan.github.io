@@ -1,9 +1,3 @@
----
-title: "Cross-Site Request Forgery(CSRF) in ASP.NET MVC"
-categories: [".net", "asp.net mvc"]
-tags: ["cross site request forgery", "csrf", "asp.net mvc"]
----
-
 # Cross-Site Request Forgery(CSRF) in ASP.NET MVC
 ___
 
