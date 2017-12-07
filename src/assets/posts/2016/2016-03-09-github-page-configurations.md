@@ -4,7 +4,7 @@ categories: ["common tech", "git"]
 tags: ["git", "github", "configuration"]
 ---
 
-## 나를 위한 GitHub Page 설정
+# 나를 위한 GitHub Page 설정
 ___
 
 오랜만에 GitHub Blogging을 다시 해보려 하니 환경 설정을 하는 것부터가 쉽지 않아 추후에 까먹지 않기 위해 블로깅.
@@ -55,4 +55,4 @@ build 후, yongwan.github.io repository master branch에 angular-webapp의 dist 
 [NodeJs]: https://nodejs.org/
 [Git]: https://git-scm.com/
 [SSH]: http://stackoverflow.com/questions/4891527/git-protocol-blocked-by-company-how-can-i-get-around-that
-[GitHubSSH]: https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/
+[GitHubSSH]: https://help.github.com/articles/generating-an-ssh-key/
