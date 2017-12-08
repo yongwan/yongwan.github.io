@@ -13,12 +13,7 @@ module.exports = function(grunt) {
   grunt.registerTask("default", ["crawling"]);
 
   grunt.registerMultiTask("crawling", function() {
-    //make grunt know this task is async.
-    //var done = this.async();
-
     grunt.log.writeln(this.target);
-
-    // var jsyaml = require("js-yaml");
 
     var postsJson = [];
 
@@ -41,17 +36,21 @@ module.exports = function(grunt) {
           var markdownContent = /^# (.*)\r\n_{1,}\r\n\r\n([\s\S]*)*/.exec(content);
           var title = markdownContent[1];
           var excerpt = markdownContent[2].split("\r\n\r\n")[0];
-          
+
           var result = {};
           result.title = title;
+          result.filename = filepath.replace(
+            /^src\/assets\/posts\/\d{4}\/(.*).md$/,
+            "$1"
+          );
           result.filepath = filepath.replace(
             /^src\/(.*)/,
             "$1"
           );
-          // src/assets/posts/2012/2012-05-11-xsd-string-data-types.md -> /posts/2012/05/11/xsd-string-data-types
+          // src/assets/posts/2012/2012-05-11-xsd-string-data-types.md -> /posts/2012-05-11-xsd-string-data-types
           result.url = filepath.replace(
-            /^src\/assets\/(posts)\/((19|20)\d\d)\/((19|20)\d\d)-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])-(.*).md$/,
-            "$1/$4/$6/$7/$8"
+            /^src\/assets\/(posts)\/\d{4}\/(.*).md$/,
+            "$1/$2"
           );
           // src/assets/posts/2012/2012-05-11-xsd-string-data-types.md -> 2012-05-11
           result.date = filepath.replace(
@@ -66,7 +65,5 @@ module.exports = function(grunt) {
       // Write joined contents to destination filepath.
       grunt.file.write(file.dest, JSON.stringify(postsJson));
     });
-
-    //done(true);
   });
 };

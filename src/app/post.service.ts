@@ -39,7 +39,7 @@ export class PostService {
     return postsByPage;
   }
 
-  public getFistPost(): Observable<Post> {
+  public getFirstPost(): Observable<Post> {
     return this.getPosts().map(posts => posts[0]);
   }
 

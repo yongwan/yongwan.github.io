@@ -1,11 +1,12 @@
 <div *ngIf="site">
   <footer class="footer" role="contentinfo">
-
-    <ul class="fa-ul footer-links">
-      <li class="nav-item" *ngFor="let link of site.author.links">
-        <a [href]="link.url" [ngClass]="link.cssClass" target="_blank"> {{ link.title }}</a>
-      </li>
-    </ul>
-    &copy; {{site.author.name}} All rights reserved.
+    <div class="container text-center">
+      <ul class="fa-ul list-inline">
+        <li class="list-inline-item" *ngFor="let link of site.author.links">
+          <a [href]="link.url" [ngClass]="link.cssClass" target="_blank"> {{ link.title }}</a>
+        </li>
+      </ul>
+      &copy; {{site.author.name}} All rights reserved.
+    </div>
   </footer>
 </div>

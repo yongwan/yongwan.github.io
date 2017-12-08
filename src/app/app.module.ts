@@ -10,7 +10,6 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
-import { HeadComponent } from './head/head.component';
 import { FooterComponent } from './footer/footer.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { HomeComponent } from './home/home.component';
@@ -24,7 +23,6 @@ import { PostService } from './post.service';
 @NgModule({
   declarations: [
     AppComponent,
-    HeadComponent,
     FooterComponent,
     NavbarComponent,
     HomeComponent,
@@ -41,13 +39,11 @@ import { PostService } from './post.service';
     InfiniteScrollModule
   ],
   providers: [
-    { provide: APP_BASE_HREF, useValue: '/' },
     Title,
     SiteService,
     PostService
   ],
   bootstrap: [
-    HeadComponent,
     AppComponent
   ]
 })
