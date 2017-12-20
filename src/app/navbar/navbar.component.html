@@ -3,10 +3,9 @@
     <div class="container">
       <a class="navbar-brand" href="">{{ site.title }}</a>
       <button class="navbar-toggler" type="button" (click)="isNavbarCollapsed = !isNavbarCollapsed" aria-controls="navbarSupportedContent"
-        aria-expanded="false" aria-label="Toggle navigation">
+        [attr.aria-expanded]="!isNavbarCollapsed">
         <span class="navbar-toggler-icon"></span>
       </button>
-
       <div class="collapse navbar-collapse" id="navbarSupportedContent" [ngbCollapse]="isNavbarCollapsed">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item" *ngFor="let nav of site.navs">

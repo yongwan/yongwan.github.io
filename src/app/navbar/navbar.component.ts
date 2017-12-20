@@ -9,10 +9,12 @@ import { Site } from '../site';
 })
 export class NavbarComponent implements OnInit {
   site: Site;
+  isNavbarCollapsed: boolean;
 
   constructor(private siteService: SiteService) { }
 
   ngOnInit() {
+    this.isNavbarCollapsed = true;
     this.getSite();
   }
 

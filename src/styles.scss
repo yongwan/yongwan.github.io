@@ -1,8 +1,30 @@
 /* You can add global styles to this file, and also import other style files */
 @import "../node_modules/bootstrap/scss/bootstrap";
+@import '../node_modules/prismjs/themes/prism.css';
 
-$body-margin-top:       $spacer * 4;
+// Fixed Top
+//
+// Top margin for navigation bar
 
+$body-margin-top: $spacer * 4;
 body {
-    margin-top: $body-margin-top;
+  margin-top: $body-margin-top;
+}
+
+// Headerr Link
+//
+// Mark down header link
+
+markdown > h1:first-child {
+  display: inline-block;
+}
+
+.anchorjs-link {
+  font-weight: 400;
+  color: rgba($link-color, .5);
+  transition: color .16s linear;
+  &:hover {
+    color: $link-color;
+    text-decoration: none;
+  }
 }

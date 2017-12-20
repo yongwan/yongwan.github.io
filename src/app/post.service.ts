@@ -18,6 +18,7 @@ export class PostService {
     this.postsPerPage = 3;
   }
 
+  // https://angular.io/tutorial/toh-pt6#tap-into-the-observable
   public getPosts(): Observable<Post[]> {
     if (this.posts) {
       return of(this.posts);
@@ -46,7 +47,7 @@ export class PostService {
   public getPost(postName: string): Observable<Post> {
     const year = postName.split('-')[0];
     const fileName = postName + '.md';
-    
+
     const filePath = 'assets/posts/' + year + '/' + fileName;
 
     return this.getPosts().map(posts => posts.find(post => post.filepath == filePath));
