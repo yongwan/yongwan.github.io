@@ -71,11 +71,6 @@ Angular CLI의 Production Build 옵션 사용
 ng build --prod --base-href "https://yongwan.github.io/"
 ```
 
-아래의 Error는 node_modules/angular2-markdown/markdown/prism.languages.metadata.json 의 값을 [null]에서 []로 변경하면 된다.
-```
-ERROR in TypeError: Cannot read property 'version' of null
-```
-
 ### Github Push - angular-cli-ghpages 
 angular-cli-ghpages를 사용하여 Github에 master branch로 push 
 
