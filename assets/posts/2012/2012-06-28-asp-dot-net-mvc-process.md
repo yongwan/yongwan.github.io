@@ -11,4 +11,4 @@ ___
 우리 코드의 경우 저기 '컨트롤러 만들기' 부분에서 DefaultControllerFactory를 상속받아 첫페이지에서 필요한 Process들(LogOn, Licensing 등)을 살짝 끼워넣어 필터링 하고 있다.
 
 [MVCProcess]: http://msdn.microsoft.com/ko-kr/library/dd381612(v=vs.100).aspx
-[MVCProcessImage]: /posts/2012/2012-06-28-asp-dot-net-mvc-process/mvc_process.png
+[MVCProcessImage]: /assets/posts/2012/2012-06-28-asp-dot-net-mvc-process/mvc_process.png
