@@ -60,7 +60,7 @@ ___
 [VS2010PerformanceTool]: http://www.microsoft.com/ko-kr/download/details.aspx?id=23205
 [SymbolServer]: http://msdn.microsoft.com/en-us/library/89axdy6y(v=vs.100).aspx
 [MetabaseErrorFix]: http://blogs.msdn.com/b/profiler/archive/2010/07/23/tip-fixing-vsperfaspnetcmd-metabase-errors.aspx
-[ServerManager]: /posts/2013/2013-08-09-profiling-error/WindowsFeatureOn2008_001.png
-[AddRoleService]: /posts/2013/2013-08-09-profiling-error/WindowsFeatureOn2008_002.png
+[ServerManager]: /assets/posts/2013/2013-08-09-profiling-error/WindowsFeatureOn2008_001.png
+[AddRoleService]: /assets/posts/2013/2013-08-09-profiling-error/WindowsFeatureOn2008_002.png
 [ExcelKorean]: http://blog.daum.net/sualchi/13720149
 [StandAloneProfilingKor]: http://plantrue.tistory.com/24

@@ -23,6 +23,6 @@ TFS 대신에 GIT을 사용할랑 말랑하고 있는 관계로 우리팀 나름
 
 [gitdoc]: http://git-scm.com/documentation
 [gitdockr]: http://dogfeet.github.io/articles/2012/progit.html
-[GettingStarted]: /posts/2013/2013-01-31-git-presentations/01.git-getting-started.pptx
-[Basic]: /posts/2013/2013-01-31-git-presentations/02.git-basics.pptx
-[Branching]: /posts/2013/2013-01-31-git-presentations/03.git-branching.pptx
+[GettingStarted]: /assets/posts/2013/2013-01-31-git-presentations/01.git-getting-started.pptx
+[Basic]: /assets/posts/2013/2013-01-31-git-presentations/02.git-basics.pptx
+[Branching]: /assets/posts/2013/2013-01-31-git-presentations/03.git-branching.pptx
