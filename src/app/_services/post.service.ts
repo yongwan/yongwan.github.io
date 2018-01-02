@@ -50,7 +50,7 @@ export class PostService {
 
     const filePath = 'assets/posts/' + year + '/' + fileName;
 
-    return this.getPosts().map(posts => posts.find(post => post.filepath == filePath));
+    return this.getPosts().map(posts => posts.find(post => post.filepath === filePath));
   }
 
   public getPostContent(filePath: string): Observable<string> {

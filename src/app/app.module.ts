@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule, Title } from '@angular/platform-browser';
-import { APP_BASE_HREF } from '@angular/common';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MarkdownModule } from 'angular2-markdown';
@@ -16,9 +16,10 @@ import { HomeComponent } from './home/home.component';
 import { PostComponent } from './post/post.component';
 import { AboutComponent } from './about/about.component';
 
-import { SiteService } from './site.service';
 import { PostDetailComponent } from './post-detail/post-detail.component';
-import { PostService } from './post.service';
+
+import { SiteService } from './_services/site.service';
+import { PostService } from './_services/post.service';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { PostService } from './post.service';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
     NgbModule.forRoot(),

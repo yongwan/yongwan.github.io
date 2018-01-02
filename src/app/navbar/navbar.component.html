@@ -6,7 +6,7 @@
         [attr.aria-expanded]="!isNavbarCollapsed">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent" [ngbCollapse]="isNavbarCollapsed">
+      <div class="navbar-collapse" id="navbarSupportedContent" [ngbCollapse]="isNavbarCollapsed">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item" *ngFor="let nav of site.navs">
             <a class="nav-link" [routerLink]="nav.url">{{ nav.title }}</a>

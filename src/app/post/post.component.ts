@@ -4,8 +4,8 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 import 'rxjs/add/operator/switchMap';
 import { Observable } from 'rxjs/Observable';
 
-import { PostService } from '../post.service';
-import { Post } from '../post';
+import { PostService } from '../_services/post.service';
+import { Post } from '../_services/post';
 
 @Component({
   selector: 'app-post',

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Title, Meta } from '@angular/platform-browser';
-import { SiteService } from './site.service';
+import { SiteService } from './_services/site.service';
 
 @Component({
   selector: 'app-root',

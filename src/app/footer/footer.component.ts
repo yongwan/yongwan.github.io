@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { SiteService } from '../site.service';
 import { Observable } from 'rxjs/Observable';
-import { Site } from '../site';
+import { SiteService } from '../_services/site.service';
+import { Site } from '../_services/site';
 
 @Component({
   selector: 'app-footer',
