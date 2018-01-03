@@ -40,17 +40,29 @@ export class PostService {
     return postsByPage;
   }
 
-  public getFirstPost(): Observable<Post> {
-    return this.getPosts().map(posts => posts[0]);
+  public getPost(postName: string): Observable<Post> {
+    const filePath = this.getFilePath(postName);
+
+    return this.getPosts().map(posts => posts.find(post => post.filepath === filePath));
   }
 
-  public getPost(postName: string): Observable<Post> {
+  public getPostIndex(postName: string): Observable<number> {
+    const filePath = this.getFilePath(postName);
+
+    return this.getPosts().map(posts => posts.findIndex(post => post.filepath === filePath));
+  }
+
+  private getFilePath(postName: string): string {
     const year = postName.split('-')[0];
     const fileName = postName + '.md';
 
     const filePath = 'assets/posts/' + year + '/' + fileName;
 
-    return this.getPosts().map(posts => posts.find(post => post.filepath === filePath));
+    return filePath;
+  }
+  
+  public getPostByIndex(index: number): Observable<Post> {
+    return this.getPosts().map(posts => posts[index]);
   }
 
   public getPostContent(filePath: string): Observable<string> {

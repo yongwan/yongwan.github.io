@@ -1,4 +1,4 @@
-<div class="container">
-  <app-post-detail [post]="post$ | async"></app-post-detail>
+<div class="container" *ngIf="post">
+  <app-post-detail [post]="post"></app-post-detail>
+  <ngb-pagination [collectionSize]="totalPage" [(page)]="currentPageIndex" (pageChange)="pageChanged($event)"></ngb-pagination>
 </div>
-<!-- TODO: paging -->
