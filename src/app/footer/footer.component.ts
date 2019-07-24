@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
 import { SiteService } from '../_services/site.service';
 import { Site } from '../_services/site';
 
@@ -22,5 +21,9 @@ export class FooterComponent implements OnInit {
   getSite(): void {
     this.siteService.getSite()
       .subscribe(site => this.site = site);
+  }
+
+  openSite(url: any) {
+    this.siteService.openSite(url);
   }
 }

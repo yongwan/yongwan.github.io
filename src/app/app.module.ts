@@ -4,8 +4,12 @@ import { BrowserModule, Title } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { MarkdownModule } from 'angular2-markdown';
+import { MarkdownModule } from 'ngx-markdown';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { fab } from '@fortawesome/free-brands-svg-icons';
+import { fas } from '@fortawesome/free-solid-svg-icons';
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -36,9 +40,10 @@ import { PostService } from './_services/post.service';
     BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
-    NgbModule.forRoot(),
+    NgbModule,
     MarkdownModule.forRoot(),
-    InfiniteScrollModule
+    InfiniteScrollModule,
+    FontAwesomeModule
   ],
   providers: [
     Title,
@@ -49,4 +54,9 @@ import { PostService } from './_services/post.service';
     AppComponent
   ]
 })
-export class AppModule { }
+export class AppModule {
+  constructor() {
+    // Add an icon to the library for convenient access in other components
+    library.add(fab, fas);
+  }
+ }

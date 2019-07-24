@@ -1,9 +1,12 @@
 <div *ngIf="site">
   <footer class="footer" role="contentinfo">
     <div class="container text-center">
-      <ul class="fa-ul list-inline">
-        <li class="list-inline-item" *ngFor="let link of site.author.links">
-          <a [href]="link.url" [ngClass]="link.cssClass" target="_blank"> {{ link.title }}</a>
+      <ul class="list-inline fa-ul">
+        <li class="list-inline-item" *ngFor="let link of site.author.links" (click)="openSite(link.url)">
+          <!-- https://stackoverflow.com/questions/41458842/attaching-click-to-anchor-tag-in-angular2/53072800-->
+          <a [routerLink]="[]" (click)="openSite(link.url)">
+            <fa-icon [icon]="link.icon" [size]="link.size"></fa-icon> {{link.title}}
+          </a>
         </li>
       </ul>
       &copy; {{site.author.name}} All rights reserved.

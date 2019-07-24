@@ -31,6 +31,4 @@ export class HomeComponent implements OnInit {
     this.postService.getPostsByPage(this.currentPage)
       .subscribe(posts => this.currentPosts = this.currentPosts.concat(posts));
   }
-
-
 }

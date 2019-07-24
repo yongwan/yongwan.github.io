@@ -1,14 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-
-import 'rxjs/add/operator/switchMap';
-import { Observable } from 'rxjs/Observable';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { NgbPaginationConfig } from '@ng-bootstrap/ng-bootstrap';
 
 import { PostService } from '../_services/post.service';
 import { Post } from '../_services/post';
-import { Tree } from '@angular/router/src/utils/tree';
 
 @Component({
   selector: 'app-post',

@@ -1,4 +1,4 @@
 <div class="container" *ngIf="post">
   <app-post-detail [post]="post"></app-post-detail>
-  <ngb-pagination [collectionSize]="totalPage" [(page)]="currentPageIndex" (pageChange)="pageChanged($event)"></ngb-pagination>
+  <ngb-pagination class="d-flex justify-content-center" [collectionSize]="totalPage" [(page)]="currentPageIndex" (pageChange)="pageChanged($event)"></ngb-pagination>
 </div>
