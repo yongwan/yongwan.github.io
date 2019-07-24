@@ -3,12 +3,25 @@
   "author": {
     "name": "YongWan Jo",
     "email": "yongwan.jo@wany.kr",
-    "links": [
-      {"title": "GitHub", "url": "https://github.com/yongwan", "cssClass": "fa fa-github fa-lg"}
-    ]
+    "links": [{
+      "title": "GitHub",
+      "url": "https://github.com/yongwan",
+      "icon": ["fab", "github"],
+      "size": "lg"
+    }, {
+      "title": "Blog",
+      "url": "http://blog.wany.kr/",
+      "icon": ["fas", "blog"],
+      "size": "lg"
+    }]
   },
-  "navs": [
-    { "title": "Posts", "url": "posts" },
-    { "title": "About", "url": "about" }
+  "navs": [{
+      "title": "Posts",
+      "url": "posts"
+    },
+    {
+      "title": "About",
+      "url": "about"
+    }
   ]
 }
